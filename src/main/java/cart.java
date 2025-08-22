@@ -27,6 +27,7 @@ public class cart extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         back = new javax.swing.JButton();
+        proceed = new javax.swing.JButton();
         menu = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,6 +49,14 @@ public class cart extends javax.swing.JFrame {
         });
         getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 720, 170, 30));
 
+        proceed.setText("jButton2");
+        proceed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                proceedActionPerformed(evt);
+            }
+        });
+        getContentPane().add(proceed, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, 350, 40));
+
         menu.setIcon(new javax.swing.ImageIcon("C:\\Users\\LOQ 151AX9\\Downloads\\cart.png")); // NOI18N
         getContentPane().add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -65,6 +74,13 @@ public class cart extends javax.swing.JFrame {
         okay.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backActionPerformed
+
+    private void proceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedActionPerformed
+        CustomersOrder hey = new CustomersOrder();
+        hey.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_proceedActionPerformed
 
     /**
      * @param args the command line arguments
@@ -105,5 +121,6 @@ public class cart extends javax.swing.JFrame {
     private javax.swing.JButton back;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel menu;
+    private javax.swing.JButton proceed;
     // End of variables declaration//GEN-END:variables
 }

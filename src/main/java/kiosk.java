@@ -47,10 +47,9 @@ public class kiosk extends javax.swing.JFrame {
                 hiActionPerformed(evt);
             }
         });
-        getContentPane().add(hi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 650, 380, 120));
+        getContentPane().add(hi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 620, 390, 140));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\LOQ 151AX9\\Downloads\\tto.png")); // NOI18N
-        jLabel1.setPreferredSize(new java.awt.Dimension(390, 765));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
