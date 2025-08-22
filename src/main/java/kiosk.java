@@ -33,7 +33,7 @@ public class kiosk extends javax.swing.JFrame {
     private void initComponents() {
 
         hi = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(400, 800));
@@ -49,8 +49,8 @@ public class kiosk extends javax.swing.JFrame {
         });
         getContentPane().add(hi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 620, 390, 140));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\LOQ 151AX9\\Downloads\\tto.png")); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tto.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 760));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -98,6 +98,6 @@ public class kiosk extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton hi;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

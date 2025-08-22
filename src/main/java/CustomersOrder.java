@@ -39,7 +39,7 @@ public class CustomersOrder extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 640, 390, 120));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\LOQ 151AX9\\Downloads\\your order.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/your order.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 760));
 
         pack();

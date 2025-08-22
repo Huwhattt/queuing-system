@@ -48,7 +48,7 @@ public class menu extends javax.swing.JFrame {
         });
         getContentPane().add(cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 720, 170, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\LOQ 151AX9\\Downloads\\menu.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 760));
 
         pack();

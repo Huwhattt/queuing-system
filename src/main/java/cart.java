@@ -57,7 +57,7 @@ public class cart extends javax.swing.JFrame {
         });
         getContentPane().add(proceed, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, 350, 40));
 
-        menu.setIcon(new javax.swing.ImageIcon("C:\\Users\\LOQ 151AX9\\Downloads\\cart.png")); // NOI18N
+        menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cart.png"))); // NOI18N
         getContentPane().add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
