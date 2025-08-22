@@ -2,18 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+package com.mycompany.queiungsystem;
 
 /**
  *
  * @author LOQ 151AX9
  */
-public class choice extends javax.swing.JFrame {
+public class kiosk extends javax.swing.JFrame {
 
     /**
-     * Creates new form choice
+     * Creates new form kiosk
      */
-    public choice() {
+    public kiosk() {
         initComponents();
+        setLocation(10,12);
+
     }
 
     /**
@@ -25,44 +28,34 @@ public class choice extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dinein = new javax.swing.JButton();
-        dineout = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        hi = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(400, 800));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        dinein.addActionListener(new java.awt.event.ActionListener() {
+        hi.setBorder(null);
+        hi.setContentAreaFilled(false);
+        hi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dineinActionPerformed(evt);
+                hiActionPerformed(evt);
             }
         });
-        getContentPane().add(dinein, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 230, 60));
+        getContentPane().add(hi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 620, 390, 140));
 
-        dineout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dineoutActionPerformed(evt);
-            }
-        });
-        getContentPane().add(dineout, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 420, 230, 60));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qms kiosk and status.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 760));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/queiungsystem/tto.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 760));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void dineoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dineoutActionPerformed
-        menu loe = new menu();
-        loe.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_dineoutActionPerformed
-
-    private void dineinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dineinActionPerformed
-        menu hey = new menu ();
-        hey.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_dineinActionPerformed
+    private void hiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hiActionPerformed
+            choice hi = new choice();
+            hi.setVisible(true);
+            this.dispose();
+    }//GEN-LAST:event_hiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -81,27 +74,26 @@ public class choice extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(choice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(kiosk.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(choice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(kiosk.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(choice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(kiosk.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(choice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(kiosk.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new choice().setVisible(true);
+                new kiosk().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton dinein;
-    private javax.swing.JButton dineout;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton hi;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
