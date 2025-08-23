@@ -26,6 +26,7 @@ public class CustomersOrder extends javax.swing.JFrame {
     private void initComponents() {
 
         back = new javax.swing.JButton();
+        number = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -38,6 +39,13 @@ public class CustomersOrder extends javax.swing.JFrame {
         });
         getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 640, 390, 120));
 
+        number.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numberActionPerformed(evt);
+            }
+        });
+        getContentPane().add(number, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 170, 40));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/queiungsystem/your order.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 760));
 
@@ -49,6 +57,10 @@ public class CustomersOrder extends javax.swing.JFrame {
         nice.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backActionPerformed
+
+    private void numberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_numberActionPerformed
 
     /**
      * @param args the command line arguments
@@ -88,5 +100,6 @@ public class CustomersOrder extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField number;
     // End of variables declaration//GEN-END:variables
 }
