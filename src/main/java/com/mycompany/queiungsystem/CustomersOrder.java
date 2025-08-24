@@ -6,6 +6,7 @@ public class CustomersOrder extends javax.swing.JFrame {
    
     public CustomersOrder() {
         initComponents();
+        number.setText(OrderData.orderNumber);
     }
 
   
@@ -20,6 +21,8 @@ public class CustomersOrder extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        back.setBorder(null);
+        back.setContentAreaFilled(false);
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);
@@ -27,6 +30,10 @@ public class CustomersOrder extends javax.swing.JFrame {
         });
         getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 640, 390, 120));
 
+        number.setEditable(false);
+        number.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 1, 36)); // NOI18N
+        number.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        number.setBorder(null);
         number.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 numberActionPerformed(evt);
@@ -41,13 +48,19 @@ public class CustomersOrder extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        OrderData.orders.clear();
+        OrderData.total = 0.0;
+        OrderData.orderNumber = "";
+        OrderData.orderType = "";
+
+        
         kiosk nice = new kiosk ();
         nice.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backActionPerformed
 
     private void numberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberActionPerformed
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_numberActionPerformed
 
    
