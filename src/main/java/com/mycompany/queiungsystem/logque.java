@@ -141,6 +141,7 @@ public class logque extends javax.swing.JFrame {
         getContentPane().add(clear);
         clear.setBounds(470, 530, 130, 40);
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/queiungsystem/login.png"))); // NOI18N
         jLabel1.setText("jLabel1");
         jLabel1.setMaximumSize(new java.awt.Dimension(1200, 800));
         jLabel1.setMinimumSize(new java.awt.Dimension(1200, 800));
@@ -172,7 +173,7 @@ public class logque extends javax.swing.JFrame {
         for (int i = 0; i < usernames.size(); i++) {
             if (enteredUser.equals(usernames.get(i)) && enteredPass.equals(passwords.get(i))) {
                 JOptionPane.showMessageDialog(this, "Access Granted");
-                new pos1().setVisible(true);
+                new temporaryframe().setVisible(true);
                 dispose();
                 return;
             }
