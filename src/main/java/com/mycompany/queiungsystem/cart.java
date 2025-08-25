@@ -1,5 +1,7 @@
 
 package com.mycompany.queiungsystem;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 public class cart extends javax.swing.JFrame {
 
@@ -101,21 +103,29 @@ public class cart extends javax.swing.JFrame {
 
     private void proceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedActionPerformed
         if (OrderData.orders.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Your cart is empty. Please add items before proceeding.", 
-                                      "Empty Cart", JOptionPane.WARNING_MESSAGE);
-        return; // stop here, do not proceed
-    }
+            JOptionPane.showMessageDialog(this, "Your cart is empty. Please add items before proceeding.",
+                    "Empty Cart", JOptionPane.WARNING_MESSAGE);
+            return; // stop here, do not proceed
+        }
 
-    // Only generate order number when proceeding
-    if (OrderData.orderNumber == null || OrderData.orderNumber.isEmpty()) {
-        int randomNum = (int) (Math.random() * 100) + 1; 
-        String formatted = String.format("%03d", randomNum); 
-        OrderData.orderNumber = formatted;
-    }
+        // Only generate order number when proceeding
+        if (OrderData.orderNumber == null || OrderData.orderNumber.isEmpty()) {
+            int randomNum = (int) (Math.random() * 100) + 1;
+            String formatted = String.format("%03d", randomNum);
+            OrderData.orderNumber = formatted;
+        }
 
-    CustomersOrder hey = new CustomersOrder();
-    hey.setVisible(true);
-    this.dispose(); 
+        if (KFrame.yey != null) { 
+            KFrame.yey.displayOrderNumber(OrderData.orderNumber);
+        }
+
+        if (KFrame.woah != null) {
+            KFrame.woah.setOrderNumber(OrderData.orderNumber);
+        }
+
+        CustomersOrder hey = new CustomersOrder();
+        hey.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_proceedActionPerformed
 
    

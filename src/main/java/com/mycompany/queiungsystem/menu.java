@@ -1,5 +1,7 @@
 
 package com.mycompany.queiungsystem;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 
 public class menu extends javax.swing.JFrame {
@@ -27,11 +29,9 @@ int[] prices = {120, 100, 150, 200, 130, 180};
             mealtotal.setText(" " + mealPrice);
         }
     }
-
     
     
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -180,8 +180,9 @@ int[] prices = {120, 100, 150, 200, 130, 180};
     }// </editor-fold>//GEN-END:initComponents
 
     private void checkoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutActionPerformed
-    cart wow = new cart();
-    wow.setVisible(true);
+        cart wow = new cart();
+        wow.setVisible(true);
+
     this.dispose();
     }//GEN-LAST:event_checkoutActionPerformed
 
