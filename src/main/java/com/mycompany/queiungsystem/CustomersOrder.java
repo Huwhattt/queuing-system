@@ -54,8 +54,7 @@ public class CustomersOrder extends javax.swing.JFrame {
         OrderData.orderType = "";
 
         
-        kiosk nice = new kiosk ();
-        nice.setVisible(true);
+        new logque().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backActionPerformed
 
