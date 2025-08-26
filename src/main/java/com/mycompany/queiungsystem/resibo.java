@@ -4,9 +4,15 @@
  */
 package com.mycompany.queiungsystem;
 
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Random;
+import javax.swing.*;
 /**
  *
- * @author LOQ 151AX9
+ * @author Darex
  */
 public class resibo extends javax.swing.JFrame {
 
@@ -15,6 +21,33 @@ public class resibo extends javax.swing.JFrame {
      */
     public resibo() {
         initComponents();
+        setSize(720,400);
+        setTitle("Receipt");
+        setLocation(407,12);
+        
+        resiboTable.getColumnModel().getColumn(0).setPreferredWidth(20);
+        resiboTable.getColumnModel().getColumn(1).setPreferredWidth(100);
+        resiboTable.getColumnModel().getColumn(2).setPreferredWidth(30);
+        
+        //-----------------------------------------------------------------------------------//
+        
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String currentDate = LocalDate.now().format(dateFormatter);
+        date.setText(currentDate);
+        
+        
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm:a");
+        String currentTime = LocalTime.now().format(timeFormatter);
+        time.setText(currentTime);
+        
+        
+        Random rand = new Random();
+        StringBuilder refNumBuilder = new StringBuilder();
+            for (int i = 0; i < 12; i++) {
+                refNumBuilder.append(rand.nextInt(10)); // Digits 0–9
+            }
+                ref.setText(refNumBuilder.toString());
+        
     }
 
     /**
@@ -26,16 +59,99 @@ public class resibo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        resiboTable = new javax.swing.JTable();
+        totalprice = new javax.swing.JLabel();
+        bayad = new javax.swing.JLabel();
+        suklimo = new javax.swing.JLabel();
+        ref = new javax.swing.JLabel();
+        date = new javax.swing.JLabel();
+        time = new javax.swing.JLabel();
+        serv = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/receipt.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
+        jPanel1.setLayout(null);
+
+        resiboTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "QTY", "ITEM", "PRICE"
+            }
+        ));
+        jScrollPane1.setViewportView(resiboTable);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(250, 180, 210, 90);
+
+        totalprice.setText("jLabel1");
+        jPanel1.add(totalprice);
+        totalprice.setBounds(410, 270, 50, 16);
+
+        bayad.setText("jLabel2");
+        jPanel1.add(bayad);
+        bayad.setBounds(410, 290, 50, 16);
+
+        suklimo.setText("jLabel3");
+        jPanel1.add(suklimo);
+        suklimo.setBounds(410, 310, 50, 16);
+
+        ref.setText("jLabel4");
+        jPanel1.add(ref);
+        ref.setBounds(320, 110, 80, 16);
+
+        date.setText("jLabel5");
+        jPanel1.add(date);
+        date.setBounds(295, 126, 70, 16);
+
+        time.setText("jLabel6");
+        jPanel1.add(time);
+        time.setBounds(410, 126, 50, 16);
+
+        serv.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        serv.setText("jLabel4");
+        jPanel1.add(serv);
+        serv.setBounds(330, 150, 60, 14);
+
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(520, 270, 160, 60);
+
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/receipt.png"))); // NOI18N
+        jPanel1.add(background);
+        background.setBounds(0, 0, 710, 360);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JOptionPane.showMessageDialog(this, "Transaction Successful!");
+        pos po = new pos();
+        po.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -73,6 +189,17 @@ public class resibo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel background;
+    public javax.swing.JLabel bayad;
+    private javax.swing.JLabel date;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel ref;
+    public javax.swing.JTable resiboTable;
+    public javax.swing.JLabel serv;
+    public javax.swing.JLabel suklimo;
+    private javax.swing.JLabel time;
+    public javax.swing.JLabel totalprice;
     // End of variables declaration//GEN-END:variables
 }
