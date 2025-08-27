@@ -16,6 +16,12 @@ public class testing extends javax.swing.JFrame {
     public testing() {
         initComponents();
         clearTable();
+        setLocation(407,12);
+        setSize(720,400);
+        
+        totalprice2.setText("00.00");
+        payment2.setText("");
+        sukli2.setText("");
     }
     
     private void clearTable() {
@@ -114,6 +120,13 @@ public class testing extends javax.swing.JFrame {
             "₱" + String.format("%.2f", total)
         });
         
+        int lastRow = model.getRowCount() - 1;
+Object totalValue = model.getValueAt(lastRow, 6); // column 6 = "Total Amount"
+
+if (totalValue != null) {
+    totalprice2.setText(totalValue.toString()); // set text directly
+}
+        
         // Auto-resize columns to fit content
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
     }
@@ -139,6 +152,8 @@ public class testing extends javax.swing.JFrame {
                 JOptionPane.ERROR_MESSAGE);
         }
     }
+        
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -148,14 +163,21 @@ public class testing extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        back = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         search = new javax.swing.JButton();
+        pay = new javax.swing.JButton();
+        totalprice2 = new javax.swing.JLabel();
+        payment2 = new javax.swing.JTextField();
+        sukli2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        background = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(null);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -170,68 +192,63 @@ public class testing extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        back.setText("jButton1");
-        back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionPerformed(evt);
-            }
-        });
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(20, 70, 380, 180);
 
+        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jTextField1);
+        jTextField1.setBounds(480, 130, 130, 30);
 
-        search.setText("jButton1");
+        search.setBorderPainted(false);
+        search.setContentAreaFilled(false);
         search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchActionPerformed(evt);
             }
         });
+        jPanel1.add(search);
+        search.setBounds(480, 190, 150, 50);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                        .addComponent(back)
-                        .addGap(41, 41, 41))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(search)
-                        .addGap(417, 417, 417))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(back)
-                .addGap(6, 6, 6)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(search))
-                .addGap(67, 67, 67))
-        );
+        pay.setBorderPainted(false);
+        pay.setContentAreaFilled(false);
+        pay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                payActionPerformed(evt);
+            }
+        });
+        jPanel1.add(pay);
+        pay.setBounds(270, 268, 125, 75);
+        jPanel1.add(totalprice2);
+        totalprice2.setBounds(130, 275, 110, 18);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 510));
+        payment2.setBorder(null);
+        jPanel1.add(payment2);
+        payment2.setBounds(130, 298, 110, 18);
+        jPanel1.add(sukli2);
+        sukli2.setBounds(130, 320, 110, 18);
+
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2);
+        jButton2.setBounds(450, 280, 140, 50);
+
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/addtemp.png"))); // NOI18N
+        jPanel1.add(background);
+        background.setBounds(0, 0, 710, 360);
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 490));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-        kiosk nays = new kiosk ();
-        nays.setVisible(true);
-    }//GEN-LAST:event_backActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
     searchForOrder();
@@ -240,6 +257,47 @@ public class testing extends javax.swing.JFrame {
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
      searchForOrder();
     }//GEN-LAST:event_searchActionPerformed
+
+    private void payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payActionPerformed
+        try {
+        // Get total from label (remove ₱ sign)
+        String totalText = totalprice2.getText().replace("₱", "").trim();
+        double total = Double.parseDouble(totalText);
+
+        // Get payment from text field
+        double payment = Double.parseDouble(payment2.getText().trim());
+
+        if (payment < total) {
+            JOptionPane.showMessageDialog(this,
+                    "Insufficient Amount",
+                    "Payment Error",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            double change = payment - total;
+            
+            // ✅ Display change in sukli2 label
+            sukli2.setText("₱" + String.format("%.2f", change));
+
+            JOptionPane.showMessageDialog(this,
+                    "Payment Successful!",
+                    "Transaction Complete",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this,
+                "Please enter a valid payment amount!",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+
+    }//GEN-LAST:event_payActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    resibo2 res = new resibo2();
+    res.setVisible(true);
+    res.sendToReceipt();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,12 +335,17 @@ public class testing extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton back;
+    private javax.swing.JLabel background;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton pay;
+    public javax.swing.JTextField payment2;
     private javax.swing.JButton search;
+    public javax.swing.JLabel sukli2;
+    public javax.swing.JLabel totalprice2;
     // End of variables declaration//GEN-END:variables
 }

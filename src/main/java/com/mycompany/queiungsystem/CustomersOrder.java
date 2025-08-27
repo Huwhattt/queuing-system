@@ -70,8 +70,8 @@ public class CustomersOrder extends javax.swing.JFrame {
         OrderData.total = 0.0;
         OrderData.orderType = "";
 
-        
-        new testing().setVisible(true);
+        new kiosk().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_backActionPerformed
 
     private void numberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberActionPerformed

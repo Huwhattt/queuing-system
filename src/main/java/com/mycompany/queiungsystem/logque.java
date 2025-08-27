@@ -178,6 +178,8 @@ public class logque extends javax.swing.JFrame {
                 KFrame.woah.setVisible(true);
                 KFrame.yey = new kitchen();
                 KFrame.yey.setVisible(true);
+                testing tes = new testing();
+                tes.setVisible(true);
                 dispose();
                 return;
             }

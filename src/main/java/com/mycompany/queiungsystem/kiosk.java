@@ -7,16 +7,6 @@ public class kiosk extends javax.swing.JFrame {
     public kiosk() {
         initComponents();
         setLocation(10,12);
-        
-        if (KFrame.yey == null) {
-            KFrame.yey = new kitchen();
-            KFrame.yey.setVisible(true);
-        }
-
-        if (KFrame.woah == null) {
-            KFrame.woah = new status();
-            KFrame.woah.setVisible(true);
-        }  
     }
     
     @SuppressWarnings("unchecked")
@@ -58,7 +48,7 @@ public class kiosk extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new kiosk().setVisible(true);
-            }
+           new logque().setVisible(true);  }
         });
     }
 
