@@ -59,13 +59,13 @@ public class resibo2 extends javax.swing.JFrame {
             }
                 ref.setText(refNumBuilder.toString());
     } 
-       public void sendToReceipt() {
-    resibo2 receiptFrame = new resibo2(); // create the receipt frame
+    public void sendToReceipt() {
+        resibo2 receiptFrame = new resibo2(); // create the receipt frame
 
-    DefaultTableModel receiptModel = new DefaultTableModel(
-        new Object[][]{}, 
-        new String[]{"Qty", "Item", "Price"}
-    ) {
+        DefaultTableModel receiptModel = new DefaultTableModel(
+            new Object[][]{}, 
+            new String[]{"Qty", "Item", "Price"}
+    )   {
         @Override
         public boolean isCellEditable(int row, int column) {
             return false;
