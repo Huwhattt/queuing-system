@@ -11,11 +11,12 @@ public class logque extends javax.swing.JFrame {
     private List<String> passwords = new ArrayList<>();
     
     public logque() {
+        setSize(1100, 800);
         setResizable(false);              
-        setSize(1920, 1080);               
-        setLocationRelativeTo(null); 
         loadAccountsFromFile();
         initComponents();
+        kiosk nice = new kiosk ();
+        nice.setVisible(true);
     }
 
    private void loadAccountsFromFile() {
@@ -68,11 +69,12 @@ public class logque extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1200, 800));
-        setMinimumSize(new java.awt.Dimension(1200, 800));
-        setPreferredSize(new java.awt.Dimension(1200, 800));
+        setLocation(new java.awt.Point(407, 12));
+        setMaximumSize(new java.awt.Dimension(1100, 800));
+        setMinimumSize(new java.awt.Dimension(1100, 800));
+        setPreferredSize(new java.awt.Dimension(1100, 800));
         setResizable(false);
-        setSize(new java.awt.Dimension(1200, 800));
+        setSize(new java.awt.Dimension(1100, 800));
         getContentPane().setLayout(null);
 
         pfield.addKeyListener(new KeyAdapter() {
@@ -147,10 +149,9 @@ public class logque extends javax.swing.JFrame {
         jLabel1.setMinimumSize(new java.awt.Dimension(1200, 800));
         jLabel1.setPreferredSize(new java.awt.Dimension(1200, 800));
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 1120, 800);
+        jLabel1.setBounds(0, 0, 1110, 800);
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void inuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inuserActionPerformed
@@ -173,8 +174,10 @@ public class logque extends javax.swing.JFrame {
         for (int i = 0; i < usernames.size(); i++) {
             if (enteredUser.equals(usernames.get(i)) && enteredPass.equals(passwords.get(i))) {
                 JOptionPane.showMessageDialog(this, "Access Granted");
-                kiosk nice = new kiosk ();
-                nice.setVisible(true);
+                KFrame.woah = new status();
+                KFrame.woah.setVisible(true);
+                KFrame.yey = new kitchen();
+                KFrame.yey.setVisible(true);
                 dispose();
                 return;
             }
