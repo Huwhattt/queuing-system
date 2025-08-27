@@ -70,7 +70,8 @@ public class CustomersOrder extends javax.swing.JFrame {
         OrderData.total = 0.0;
         OrderData.orderType = "";
 
-        new logque().setVisible(true);
+        
+        new testing().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backActionPerformed
 

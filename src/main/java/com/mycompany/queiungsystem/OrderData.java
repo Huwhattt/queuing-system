@@ -13,6 +13,7 @@ public class OrderData {
     
     private static Map<Integer, List<String>> orderHistory = new HashMap<>();
     private static Map<Integer, Double> orderTotals = new HashMap<>();
+     private static Map<Integer, String> orderTypes = new HashMap<>(); 
 
 
     static int currentOrderNumber = 0;
@@ -29,6 +30,7 @@ public class OrderData {
         currentOrderNumber++;
         orderHistory.put(currentOrderNumber, new ArrayList<>(orders));
         orderTotals.put(currentOrderNumber, total);
+        orderTypes.put(currentOrderNumber, orderType);
 
 
         resetOrder();
@@ -44,7 +46,10 @@ public class OrderData {
     public static double getTotalByNumber(int orderNumber) {
         return orderTotals.getOrDefault(orderNumber, 0.0);
     }
-
+    
+    public static String getOrderTypeByNumber(int orderNumber) {
+        return orderTypes.getOrDefault(orderNumber, "");
+    }
 
     public static void resetOrder() {
         orders.clear();
@@ -59,5 +64,23 @@ public class OrderData {
 
     public static int getCurrentOrderNumber() {
         return currentOrderNumber;
+    }
+    public static Set<Integer> getAllOrderNumbers() {
+        return orderHistory.keySet();
+    }
+
+    // NEW: Get order history map (for table display)
+    public static Map<Integer, List<String>> getOrderHistory() {
+        return orderHistory;
+    }
+
+    // NEW: Get order totals map
+    public static Map<Integer, Double> getOrderTotals() {
+        return orderTotals;
+    }
+
+    // NEW: Get order types map
+    public static Map<Integer, String> getOrderTypes() {
+        return orderTypes;
     }
 }
