@@ -6,7 +6,8 @@ public class kiosk extends javax.swing.JFrame {
 
     public kiosk() {
         initComponents();
-        setLocation(10,12);
+        setSize(400, 800);
+        setLocation(10, 12); 
     }
     
     @SuppressWarnings("unchecked")
@@ -48,7 +49,8 @@ public class kiosk extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new kiosk().setVisible(true);
-           new logque().setVisible(true);  }
+                new logque().setVisible(true);
+            }
         });
     }
 
