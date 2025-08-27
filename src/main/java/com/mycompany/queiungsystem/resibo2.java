@@ -85,7 +85,7 @@ public class resibo2 extends javax.swing.JFrame {
         }
     }
 
-    // Set the model to the resiboTable
+    
     receiptFrame.resiboTable.setModel(receiptModel);
 
    
@@ -93,7 +93,7 @@ public class resibo2 extends javax.swing.JFrame {
     receiptFrame.bayad.setText(tes.payment2.getText());
     receiptFrame.suklimo.setText(tes.sukli2.getText());
 
-    // Show the receipt frame
+    
     receiptFrame.setVisible(true);
 }
     
