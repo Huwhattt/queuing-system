@@ -18,11 +18,11 @@ public class testing extends javax.swing.JFrame {
         clearTable();
     }
     
-private void clearTable() {
-        // Create empty table model
+    private void clearTable() {
+        // Create empty table model with additional columns
         DefaultTableModel model = new DefaultTableModel(
             new Object[][]{}, 
-            new String[]{"Order Number", "Items", "Total Amount", "Order Type"}
+            new String[]{"Order Number", "Item", "Quantity", "Price", "Subtotal", "Order Type", "Total Amount"}
         ) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -42,10 +42,10 @@ private void clearTable() {
             return;
         }
         
-        // Create table model
+        // Create table model with detailed columns
         DefaultTableModel model = new DefaultTableModel(
             new Object[][]{}, 
-            new String[]{"Order Number", "Items", "Total Amount", "Order Type"}
+            new String[]{"Order Number", "Item", "Quantity", "Price", "Subtotal", "Order Type", "Total Amount"}
         ) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -60,29 +60,65 @@ private void clearTable() {
         Double total = OrderData.getTotalByNumber(orderNumber);
         String type = OrderData.getOrderTypeByNumber(orderNumber);
         
-        // Convert list of items to a single string for display
-        StringBuilder itemsBuilder = new StringBuilder();
-        for (String item : orderItems) {
-            itemsBuilder.append("• ").append(item).append("\n");
-        }
-        
-        // Remove the last newline character
-        if (itemsBuilder.length() > 0) {
-            itemsBuilder.setLength(itemsBuilder.length() - 1);
-        }
-        
-        // Add row to table
+        // Add order header row
         model.addRow(new Object[]{
             String.format("%03d", orderNumber),
-            itemsBuilder.toString(),
-            "₱" + String.format("%.2f", total),
-            type
+            "ORDER ITEMS:", "", "", "", type, ""
+        });
+        
+        // Parse and add each item with quantity details
+        for (String item : orderItems) {
+            // Parse the order string (format: "Meal xQty - ₱Price")
+            try {
+                String[] parts = item.split(" x");
+                String mealName = parts[0];
+                
+                String[] rest = parts[1].split(" - ₱");
+                int quantity = Integer.parseInt(rest[0]);
+                double subtotal = Double.parseDouble(rest[1]);
+                double unitPrice = subtotal / quantity;
+                
+                // Add item row with quantity details
+                model.addRow(new Object[]{
+                    "", // Empty order number for item rows
+                    mealName,
+                    quantity,
+                    "₱" + String.format("%.2f", unitPrice),
+                    "₱" + String.format("%.2f", subtotal),
+                    "", // Empty order type for item rows
+                    ""  // Empty total for item rows
+                });
+                
+            } catch (Exception e) {
+                // If parsing fails, just add the raw string
+                model.addRow(new Object[]{
+                    "",
+                    item,
+                    "N/A",
+                    "N/A",
+                    "N/A",
+                    "",
+                    ""
+                });
+            }
+        }
+        
+        // Add total row
+        model.addRow(new Object[]{
+            "",
+            "TOTAL:",
+            "",
+            "",
+            "",
+            "",
+            "₱" + String.format("%.2f", total)
         });
         
         // Auto-resize columns to fit content
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
     }
-     private void searchForOrder() {
+    
+        private void searchForOrder() {
         try {
             String input = jTextField1.getText().trim();
             if (input.isEmpty()) {
@@ -141,7 +177,6 @@ private void clearTable() {
             }
         });
 
-        jTextField1.setText("jTextField1");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -160,41 +195,35 @@ private void clearTable() {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jTextField1)
-                        .addContainerGap())
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addComponent(back)
+                        .addGap(41, 41, 41))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(back)
-                                .addGap(41, 41, 41))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(search)
-                                .addGap(36, 36, 36))))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(search)
+                        .addGap(417, 417, 417))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(back)
-                        .addGap(143, 143, 143)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(search)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(back)
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(search))
+                .addGap(67, 67, 67))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 670, 470));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 510));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

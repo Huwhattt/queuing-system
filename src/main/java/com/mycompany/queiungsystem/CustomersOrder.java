@@ -72,7 +72,6 @@ public class CustomersOrder extends javax.swing.JFrame {
 
         
         new testing().setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_backActionPerformed
 
     private void numberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberActionPerformed

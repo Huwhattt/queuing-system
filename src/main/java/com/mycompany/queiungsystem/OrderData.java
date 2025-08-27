@@ -18,7 +18,8 @@ public class OrderData {
 
     static int currentOrderNumber = 0;
 
-
+    
+    
     public static void addOrder(String meal, double price, int qty) {
         String order = meal + " x" + qty + " - ₱" + String.format("%.2f", (price * qty));
         orders.add(order);
