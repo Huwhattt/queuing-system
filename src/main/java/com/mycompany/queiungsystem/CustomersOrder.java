@@ -1,13 +1,31 @@
 
 package com.mycompany.queiungsystem;
 
+import java.util.List;
 public class CustomersOrder extends javax.swing.JFrame {
 
-   
+    private int orderNumber;
+    public CustomersOrder(int orderNumber) {
+        initComponents();
+        this.orderNumber = orderNumber;
+
+        // Show the order number in the text field
+        number.setText(String.format("%03d", orderNumber));
+
+        // (Optional) You can also display the orders and total here if needed
+        List<String> orders = OrderData.getOrderByNumber(orderNumber);
+        double total = OrderData.getTotalByNumber(orderNumber);
+
+        if (orders != null && !orders.isEmpty()) {
+            System.out.println("Orders for " + orderNumber + ": " + orders);
+            System.out.println("Total: " + total);
+        }
+    }
     public CustomersOrder() {
         initComponents();
-        number.setText(OrderData.orderNumber);
+        number.setText("No Order");
     }
+
 
   
     @SuppressWarnings("unchecked")
@@ -50,10 +68,8 @@ public class CustomersOrder extends javax.swing.JFrame {
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         OrderData.orders.clear();
         OrderData.total = 0.0;
-        OrderData.orderNumber = "";
         OrderData.orderType = "";
 
-        
         new logque().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backActionPerformed

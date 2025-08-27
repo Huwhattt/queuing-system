@@ -83,47 +83,43 @@ public class cart extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-        int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to cancel your order?", 
-                                                   "Cancel Order", JOptionPane.YES_NO_OPTION);
+    int choice = javax.swing.JOptionPane.showConfirmDialog(
+        this,
+        "Are you sure you want to cancel your order?",
+        "Confirm Cancel",
+        javax.swing.JOptionPane.YES_NO_OPTION
+    );
 
-        if (choice == JOptionPane.YES_OPTION) {
-            // Clear order data
-            OrderData.orders.clear();
-            OrderData.total = 0.0;
-            OrderData.orderNumber = "";
-            OrderData.orderType = "";
+    if (choice == javax.swing.JOptionPane.YES_OPTION) {
+    
+        OrderData.resetOrder();
 
-            JOptionPane.showMessageDialog(this, "Order cancelled successfully.");
-        
-        kiosk okay = new kiosk ();
-        okay.setVisible(true);
+        // Notify user
+        JOptionPane.showMessageDialog(this, "Your order has been cancelled.");
+
+        // Go back to kiosk screen
+        kiosk ah = new kiosk();
+        ah.setVisible(true);
         this.dispose();
-        }
+
+    } else if (choice == javax.swing.JOptionPane.NO_OPTION) {
+        // Just resume without resetting anything
+        JOptionPane.showMessageDialog(this, "Your order has been resumed.");
+    }
+
     }//GEN-LAST:event_backActionPerformed
 
     private void proceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedActionPerformed
         if (OrderData.orders.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Your cart is empty. Please add items before proceeding.",
-                    "Empty Cart", JOptionPane.WARNING_MESSAGE);
-            return; // stop here, do not proceed
+            javax.swing.JOptionPane.showMessageDialog(this, "Your cart is empty!");
+            return; // stop here
         }
 
-        // Only generate order number when proceeding
-        if (OrderData.orderNumber == null || OrderData.orderNumber.isEmpty()) {
-            int randomNum = (int) (Math.random() * 100) + 1;
-            String formatted = String.format("%03d", randomNum);
-            OrderData.orderNumber = formatted;
-        }
+        // Save the current order and get its number
+        int orderNumber = OrderData.saveOrder();
 
-        if (KFrame.yey != null) { 
-            KFrame.yey.displayOrderNumber(OrderData.orderNumber);
-        }
-
-        if (KFrame.woah != null) {
-            KFrame.woah.setOrderNumber(OrderData.orderNumber);
-        }
-
-        CustomersOrder hey = new CustomersOrder();
+        // Pass to CustomersOrder
+        CustomersOrder hey = new CustomersOrder(orderNumber);
         hey.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_proceedActionPerformed
