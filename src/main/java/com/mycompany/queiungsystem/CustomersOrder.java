@@ -5,13 +5,19 @@ import java.util.List;
 public class CustomersOrder extends javax.swing.JFrame {
 
     private int orderNumber;
+    
+    public CustomersOrder() {
+        initComponents();
+        setLocation(10, 12);
+        setSize(400, 800);
+        number.setText("No Order");
+    }
+
     public CustomersOrder(int orderNumber) {
         initComponents();
         this.orderNumber = orderNumber;
 
-
         number.setText(String.format("%03d", orderNumber));
-
 
         List<String> orders = OrderData.getOrderByNumber(orderNumber);
         double total = OrderData.getTotalByNumber(orderNumber);
@@ -21,13 +27,7 @@ public class CustomersOrder extends javax.swing.JFrame {
             System.out.println("Total: " + total);
         }
     }
-    public CustomersOrder() {
-        initComponents();
-        number.setText("No Order");
-    }
-
-
-  
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

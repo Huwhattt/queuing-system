@@ -11,12 +11,10 @@ public class logque extends javax.swing.JFrame {
     private List<String> passwords = new ArrayList<>();
     
     public logque() {
-        setSize(1100, 800);
-        setResizable(false);              
-        loadAccountsFromFile();
         initComponents();
-        kiosk nice = new kiosk ();
-        nice.setVisible(true);
+        setSize(1100, 800);
+        setResizable(false);
+        loadAccountsFromFile();
     }
 
    private void loadAccountsFromFile() {
@@ -66,7 +64,7 @@ public class logque extends javax.swing.JFrame {
         reg = new javax.swing.JButton();
         login = new javax.swing.JButton();
         clear = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(407, 12));
@@ -94,7 +92,7 @@ public class logque extends javax.swing.JFrame {
             }
         });
         getContentPane().add(pfield);
-        pfield.setBounds(490, 470, 350, 30);
+        pfield.setBounds(500, 480, 330, 20);
 
         inuser.setBorder(null);
         inuser.setOpaque(false);
@@ -105,7 +103,7 @@ public class logque extends javax.swing.JFrame {
             }
         });
         getContentPane().add(inuser);
-        inuser.setBounds(490, 430, 350, 30);
+        inuser.setBounds(500, 430, 330, 20);
 
         reg.setOpaque(false);
         reg.setContentAreaFilled(false);
@@ -116,7 +114,7 @@ public class logque extends javax.swing.JFrame {
             }
         });
         getContentPane().add(reg);
-        reg.setBounds(650, 530, 180, 40);
+        reg.setBounds(640, 520, 190, 50);
 
         login.setOpaque(false);
         login.setContentAreaFilled(false);
@@ -130,7 +128,7 @@ public class logque extends javax.swing.JFrame {
             }
         });
         getContentPane().add(login);
-        login.setBounds(290, 530, 130, 40);
+        login.setBounds(290, 520, 140, 50);
 
         clear.setOpaque(false);
         clear.setContentAreaFilled(false);
@@ -141,15 +139,11 @@ public class logque extends javax.swing.JFrame {
             }
         });
         getContentPane().add(clear);
-        clear.setBounds(470, 530, 130, 40);
+        clear.setBounds(470, 520, 140, 50);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        jLabel1.setMaximumSize(new java.awt.Dimension(1200, 800));
-        jLabel1.setMinimumSize(new java.awt.Dimension(1200, 800));
-        jLabel1.setPreferredSize(new java.awt.Dimension(1200, 800));
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 1110, 800);
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Arabelle Donor\\Downloads\\login (7).png")); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 1120, 800);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -174,12 +168,19 @@ public class logque extends javax.swing.JFrame {
         for (int i = 0; i < usernames.size(); i++) {
             if (enteredUser.equals(usernames.get(i)) && enteredPass.equals(passwords.get(i))) {
                 JOptionPane.showMessageDialog(this, "Access Granted");
-                KFrame.woah = new status();
-                KFrame.woah.setVisible(true);
-                KFrame.yey = new kitchen();
-                KFrame.yey.setVisible(true);
-                testing tes = new testing();
-                tes.setVisible(true);
+
+                kitchen k = new kitchen();
+                k.setVisible(true);
+                
+                testing t = new testing();
+                t.setVisible(true);
+                
+                counter c = new counter();
+                c.setVisible(true);
+                
+                status2 s = new status2();
+                s.setVisible(true);
+                
                 dispose();
                 return;
             }
@@ -210,7 +211,7 @@ public class logque extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clear;
     public javax.swing.JTextField inuser;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     public javax.swing.JButton login;
     private javax.swing.JPasswordField pfield;
     public javax.swing.JButton reg;

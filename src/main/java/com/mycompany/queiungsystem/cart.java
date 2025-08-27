@@ -3,11 +3,14 @@ package com.mycompany.queiungsystem;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 public class cart extends javax.swing.JFrame {
 
     
     public cart() {
         initComponents();
+        setSize(400, 800);
+        setLocation(10, 12);
         StringBuilder sb = new StringBuilder();
         for (String order : OrderData.orders) {
             sb.append(order).append("\n");
@@ -18,7 +21,6 @@ public class cart extends javax.swing.JFrame {
                           + "\nTOTAL: " + OrderData.getFormattedTotal());
         totalmenu.setEditable(false);
     }
-
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -112,15 +114,17 @@ public class cart extends javax.swing.JFrame {
     private void proceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedActionPerformed
         if (OrderData.orders.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Your cart is empty!");
-            return; 
+            return;
         }
 
-
         int orderNumber = OrderData.saveOrder();
+        
+        testing t = new testing();
+        t.orderToTable(orderNumber);
 
-
-        CustomersOrder hey = new CustomersOrder(orderNumber);
-        hey.setVisible(true);
+        CustomersOrder queueWindow = new CustomersOrder(orderNumber);
+        queueWindow.setVisible(true);
+        
         this.dispose();
     }//GEN-LAST:event_proceedActionPerformed
 

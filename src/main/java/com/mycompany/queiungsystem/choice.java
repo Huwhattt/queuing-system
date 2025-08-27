@@ -7,6 +7,8 @@ public class choice extends javax.swing.JFrame {
    
     public choice() {
         initComponents();
+        setSize(400, 800);
+        setLocation(10, 12);
     }
 
   

@@ -19,6 +19,8 @@ int[] prices = {120, 100, 150, 200, 130, 180};
 
     public menu() {
         initComponents();
+        setSize(400, 800);
+        setLocation(10, 12);
         quantity.setText("1");
     }
 

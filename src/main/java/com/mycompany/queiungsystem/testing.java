@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.queiungsystem;
 
 import javax.swing.table.DefaultTableModel;
@@ -10,9 +6,6 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 public class testing extends javax.swing.JFrame {
 
-    /**
-     * Creates new form testing
-     */
     public testing() {
         initComponents();
         clearTable();
@@ -22,10 +15,15 @@ public class testing extends javax.swing.JFrame {
         totalprice2.setText("00.00");
         payment2.setText("");
         sukli2.setText("");
+        
+        jButton2.setOpaque(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.setBorderPainted(false);
+        
     }
     
-    private void clearTable() {
-        // Create empty table model with additional columns
+    public void clearTable() {
+        jTextField1.setText("");
         DefaultTableModel model = new DefaultTableModel(
             new Object[][]{}, 
             new String[]{"Order Number", "Item", "Quantity", "Price", "Subtotal", "Order Type", "Total Amount"}
@@ -38,123 +36,101 @@ public class testing extends javax.swing.JFrame {
         jTable1.setModel(model);
     }
     
-    private void loadSpecificOrderToTable(int orderNumber) {
-        // Check if order exists
+    public void orderToTable(int orderNumber) {
         if (!OrderData.getAllOrderNumbers().contains(orderNumber)) {
-            JOptionPane.showMessageDialog(this, 
-                "Order number " + orderNumber + " not found!", 
-                "Order Not Found", 
-                JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this,
+                    "Order number " + orderNumber + " not found!",
+                    "Order Not Found",
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
-        // Create table model with detailed columns
+
         DefaultTableModel model = new DefaultTableModel(
-            new Object[][]{}, 
-            new String[]{"Order Number", "Item", "Quantity", "Price", "Subtotal", "Order Type", "Total Amount"}
+                new Object[][]{},
+                new String[]{"Order Number", "Item", "Quantity", "Price", "Subtotal", "Order Type", "Total Amount"}
         ) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        
+
         jTable1.setModel(model);
-        
-        // Load specific order data
+
         List<String> orderItems = OrderData.getOrderByNumber(orderNumber);
         Double total = OrderData.getTotalByNumber(orderNumber);
         String type = OrderData.getOrderTypeByNumber(orderNumber);
-        
-        // Add order header row
-        model.addRow(new Object[]{
-            String.format("%03d", orderNumber),
-            "ORDER ITEMS:", "", "", "", type, ""
-        });
-        
-        // Parse and add each item with quantity details
+
+        StringBuilder items = new StringBuilder();
+        StringBuilder quantities = new StringBuilder();
+        StringBuilder prices = new StringBuilder();
+        StringBuilder subtotals = new StringBuilder();
+
         for (String item : orderItems) {
-            // Parse the order string (format: "Meal xQty - ₱Price")
             try {
                 String[] parts = item.split(" x");
                 String mealName = parts[0];
-                
+
                 String[] rest = parts[1].split(" - ₱");
                 int quantity = Integer.parseInt(rest[0]);
                 double subtotal = Double.parseDouble(rest[1]);
                 double unitPrice = subtotal / quantity;
-                
-                // Add item row with quantity details
-                model.addRow(new Object[]{
-                    "", // Empty order number for item rows
-                    mealName,
-                    quantity,
-                    "₱" + String.format("%.2f", unitPrice),
-                    "₱" + String.format("%.2f", subtotal),
-                    "", // Empty order type for item rows
-                    ""  // Empty total for item rows
-                });
-                
+
+                items.append(mealName).append(", ");
+                quantities.append(quantity).append(", ");
+                prices.append("₱").append(String.format("%.2f", unitPrice)).append(", ");
+                subtotals.append("₱").append(String.format("%.2f", subtotal)).append(", ");
+
             } catch (Exception e) {
-                // If parsing fails, just add the raw string
-                model.addRow(new Object[]{
-                    "",
-                    item,
-                    "N/A",
-                    "N/A",
-                    "N/A",
-                    "",
-                    ""
-                });
+                items.append(item).append(", ");
+                quantities.append("N/A, ");
+                prices.append("N/A, ");
+                subtotals.append("N/A, ");
             }
         }
-        
-        // Add total row
-        model.addRow(new Object[]{
-            "",
-            "TOTAL:",
-            "",
-            "",
-            "",
-            "",
-            "₱" + String.format("%.2f", total)
-        });
-        
-        int lastRow = model.getRowCount() - 1;
-Object totalValue = model.getValueAt(lastRow, 6); // column 6 = "Total Amount"
 
-if (totalValue != null) {
-    totalprice2.setText(totalValue.toString()); // set text directly
-}
-        
-        // Auto-resize columns to fit content
+        if (items.length() > 0) {
+            items.setLength(items.length() - 2);
+        }
+        if (quantities.length() > 0) {
+            quantities.setLength(quantities.length() - 2);
+        }
+        if (prices.length() > 0) {
+            prices.setLength(prices.length() - 2);
+        }
+        if (subtotals.length() > 0) {
+            subtotals.setLength(subtotals.length() - 2);
+        }
+
+        model.addRow(new Object[]{
+            String.format("%03d", orderNumber), items.toString(), quantities.toString(), prices.toString(), subtotals.toString(), type, "₱" + String.format("%.2f", total) 
+        });
+
+        totalprice2.setText("₱" + String.format("%.2f", total));
+
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
     }
-    
-        private void searchForOrder() {
+    private void searchForOrder() {
         try {
             String input = jTextField1.getText().trim();
             if (input.isEmpty()) {
-                JOptionPane.showMessageDialog(this, 
-                    "Please enter an order number!", 
-                    "Input Required", 
-                    JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this,
+                        "Please enter an order number!",
+                        "Input Required",
+                        JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            
+
             int orderNumber = Integer.parseInt(input);
-            loadSpecificOrderToTable(orderNumber);
-            
+            orderToTable(orderNumber);
+
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, 
-                "Please enter a valid number!", 
-                "Invalid Input", 
-                JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,
+                    "Please enter a valid number!",
+                    "Invalid Input",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
-        
-    
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -170,14 +146,11 @@ if (totalValue != null) {
         payment2 = new javax.swing.JTextField();
         sukli2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        background = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel1.setLayout(null);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -192,17 +165,12 @@ if (totalValue != null) {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 70, 380, 180);
-
         jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1);
-        jTextField1.setBounds(480, 130, 130, 30);
 
         search.setBorderPainted(false);
         search.setContentAreaFilled(false);
@@ -211,8 +179,6 @@ if (totalValue != null) {
                 searchActionPerformed(evt);
             }
         });
-        jPanel1.add(search);
-        search.setBounds(480, 190, 150, 50);
 
         pay.setBorderPainted(false);
         pay.setContentAreaFilled(false);
@@ -221,31 +187,92 @@ if (totalValue != null) {
                 payActionPerformed(evt);
             }
         });
-        jPanel1.add(pay);
-        pay.setBounds(270, 268, 125, 75);
-        jPanel1.add(totalprice2);
-        totalprice2.setBounds(130, 275, 110, 18);
 
         payment2.setBorder(null);
-        jPanel1.add(payment2);
-        payment2.setBounds(130, 298, 110, 18);
-        jPanel1.add(sukli2);
-        sukli2.setBounds(130, 320, 110, 18);
 
-        jButton2.setText("jButton2");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2);
-        jButton2.setBounds(450, 280, 140, 50);
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/addtemp.png"))); // NOI18N
-        jPanel1.add(background);
-        background.setBounds(0, 0, 710, 360);
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Arabelle Donor\\Downloads\\cashier (2).png")); // NOI18N
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 490));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(480, 480, 480)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(480, 480, 480)
+                        .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(totalprice2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(sukli2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(270, 270, 270)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(payment2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(270, 270, 270)
+                        .addComponent(pay, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(130, 130, 130)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
+                                .addComponent(totalprice2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(sukli2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(310, 310, 310)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(298, 298, 298)
+                                .addComponent(payment2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(268, 268, 268)
+                                .addComponent(pay, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -259,12 +286,11 @@ if (totalValue != null) {
     }//GEN-LAST:event_searchActionPerformed
 
     private void payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payActionPerformed
+        
         try {
-        // Get total from label (remove ₱ sign)
         String totalText = totalprice2.getText().replace("₱", "").trim();
         double total = Double.parseDouble(totalText);
 
-        // Get payment from text field
         double payment = Double.parseDouble(payment2.getText().trim());
 
         if (payment < total) {
@@ -274,14 +300,14 @@ if (totalValue != null) {
                     JOptionPane.WARNING_MESSAGE);
         } else {
             double change = payment - total;
-            
-            // ✅ Display change in sukli2 label
+
             sukli2.setText("₱" + String.format("%.2f", change));
 
             JOptionPane.showMessageDialog(this,
                     "Payment Successful!",
                     "Transaction Complete",
                     JOptionPane.INFORMATION_MESSAGE);
+            clearTable();
         }
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this,
@@ -289,8 +315,6 @@ if (totalValue != null) {
                 "Invalid Input",
                 JOptionPane.ERROR_MESSAGE);
     }
-
-
     }//GEN-LAST:event_payActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -335,9 +359,9 @@ if (totalValue != null) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel background;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable1;
