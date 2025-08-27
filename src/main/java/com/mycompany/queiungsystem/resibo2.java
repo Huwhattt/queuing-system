@@ -72,12 +72,12 @@ public class resibo2 extends javax.swing.JFrame {
         }
     };
 
-    testing tes = new testing();
-    DefaultTableModel model = (DefaultTableModel) tes.jTable1.getModel();
-    for (int i = 0; i < model.getRowCount(); i++) {
-        Object qty = model.getValueAt(i, 2);    // Quantity
-        Object item = model.getValueAt(i, 1);   // Item
-        Object price = model.getValueAt(i, 3);  // Price
+        testing tes = new testing();
+        DefaultTableModel model = (DefaultTableModel) tes.jTable1.getModel();
+            for (int i = 0; i < model.getRowCount(); i++) {
+                Object qty = model.getValueAt(i, 2);    // Quantity
+                Object item = model.getValueAt(i, 1);   // Item
+                Object price = model.getValueAt(i, 3);  // Price
 
         if (qty != null && item != null && price != null &&
             !qty.toString().isEmpty() && !item.toString().equals("ORDER ITEMS:")) {
