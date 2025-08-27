@@ -94,16 +94,16 @@ public class cart extends javax.swing.JFrame {
     
         OrderData.resetOrder();
 
-        // Notify user
+
         JOptionPane.showMessageDialog(this, "Your order has been cancelled.");
 
-        // Go back to kiosk screen
+
         kiosk ah = new kiosk();
         ah.setVisible(true);
         this.dispose();
 
     } else if (choice == javax.swing.JOptionPane.NO_OPTION) {
-        // Just resume without resetting anything
+
         JOptionPane.showMessageDialog(this, "Your order has been resumed.");
     }
 
@@ -112,13 +112,13 @@ public class cart extends javax.swing.JFrame {
     private void proceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedActionPerformed
         if (OrderData.orders.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Your cart is empty!");
-            return; // stop here
+            return; 
         }
 
-        // Save the current order and get its number
+
         int orderNumber = OrderData.saveOrder();
 
-        // Pass to CustomersOrder
+
         CustomersOrder hey = new CustomersOrder(orderNumber);
         hey.setVisible(true);
         this.dispose();

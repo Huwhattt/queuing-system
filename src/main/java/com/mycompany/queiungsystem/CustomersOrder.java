@@ -9,10 +9,10 @@ public class CustomersOrder extends javax.swing.JFrame {
         initComponents();
         this.orderNumber = orderNumber;
 
-        // Show the order number in the text field
+
         number.setText(String.format("%03d", orderNumber));
 
-        // (Optional) You can also display the orders and total here if needed
+
         List<String> orders = OrderData.getOrderByNumber(orderNumber);
         double total = OrderData.getTotalByNumber(orderNumber);
 

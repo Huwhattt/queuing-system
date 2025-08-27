@@ -187,29 +187,29 @@ int[] prices = {120, 100, 150, 200, 130, 180};
     }//GEN-LAST:event_checkoutActionPerformed
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
-int choice = javax.swing.JOptionPane.showConfirmDialog(
-    this,
-    "Are you sure you want to cancel your order?",
-    "Confirm Cancel",
-    javax.swing.JOptionPane.YES_NO_OPTION
-);
+    int choice = javax.swing.JOptionPane.showConfirmDialog(
+        this,
+        "Are you sure you want to cancel your order?",
+        "Confirm Cancel",
+        javax.swing.JOptionPane.YES_NO_OPTION
+    );
 
-if (choice == javax.swing.JOptionPane.YES_OPTION) {
-    // Reset all current order data
-    OrderData.resetOrder();
+    if (choice == javax.swing.JOptionPane.YES_OPTION) {
 
-    // Notify user
-    JOptionPane.showMessageDialog(this, "Your order has been cancelled.");
+        OrderData.resetOrder();
 
-    // Go back to kiosk screen
-    kiosk back = new kiosk();
-    back.setVisible(true);
-    this.dispose();
 
-} else if (choice == javax.swing.JOptionPane.NO_OPTION) {
-    // Just resume without resetting anything
-    JOptionPane.showMessageDialog(this, "Your order has been resumed.");
-}
+        JOptionPane.showMessageDialog(this, "Your order has been cancelled.");
+
+
+        kiosk back = new kiosk();
+        back.setVisible(true);
+        this.dispose();
+
+    } else if (choice == javax.swing.JOptionPane.NO_OPTION) {
+
+        JOptionPane.showMessageDialog(this, "Your order has been resumed.");
+    }
 
     }//GEN-LAST:event_cancelActionPerformed
 
