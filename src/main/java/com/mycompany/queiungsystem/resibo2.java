@@ -128,7 +128,7 @@ public class resibo2 extends javax.swing.JFrame {
         serv.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
         serv.setText("jLabel2");
         jPanel1.add(serv);
-        serv.setBounds(330, 150, 60, 14);
+        serv.setBounds(330, 153, 60, 14);
 
         ref.setText("jLabel3");
         jPanel1.add(ref);
