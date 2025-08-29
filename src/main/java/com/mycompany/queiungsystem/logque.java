@@ -141,7 +141,7 @@ public class logque extends javax.swing.JFrame {
         getContentPane().add(clear);
         clear.setBounds(470, 520, 140, 50);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Arabelle Donor\\Downloads\\login (7).png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login.png"))); // NOI18N
         getContentPane().add(jLabel2);
         jLabel2.setBounds(0, 0, 1120, 800);
 
