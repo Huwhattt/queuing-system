@@ -20,7 +20,7 @@ public class kitchen extends javax.swing.JFrame {
     public kitchen() {
         initComponents();
         
-        setSize(710,363);
+        setSize(720,400);
         setLocation(407, 413); 
         
         kitchenOrders = new JTextField[]{order1, order2, order3, order4, order5, order6};

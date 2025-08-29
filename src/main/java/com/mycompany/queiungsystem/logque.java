@@ -12,7 +12,7 @@ public class logque extends javax.swing.JFrame {
     
     public logque() {
         initComponents();
-        setSize(1100, 800);
+        setSize(1112,797);
         setResizable(false);
         loadAccountsFromFile();
     }

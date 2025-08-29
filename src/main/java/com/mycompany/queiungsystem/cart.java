@@ -123,6 +123,7 @@ public class cart extends javax.swing.JFrame {
         t.orderToTable(orderNumber);
 
         CustomersOrder queueWindow = new CustomersOrder(orderNumber);
+        queueWindow.setLocation(10,12);
         queueWindow.setVisible(true);
         
         this.dispose();

@@ -12,6 +12,7 @@ public class KFrame {
     
     public static kitchen yey;
     public static status woah;
+    public static CustomersOrder hi;
     
     public static status statusFrame = null;
 }

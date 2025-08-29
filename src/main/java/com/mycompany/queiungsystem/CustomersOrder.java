@@ -8,8 +8,8 @@ public class CustomersOrder extends javax.swing.JFrame {
     
     public CustomersOrder() {
         initComponents();
-        setLocation(10, 12);
         setSize(400, 800);
+        setLocation(10, 12);
         number.setText("No Order");
     }
 
