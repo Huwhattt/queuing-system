@@ -120,7 +120,7 @@ public class cart extends javax.swing.JFrame {
         int orderNumber = OrderData.saveOrder();
         
         testing t = new testing();
-        t.orderToTable(orderNumber);
+        t.loadSpecificOrderToTable(orderNumber);
 
         CustomersOrder queueWindow = new CustomersOrder(orderNumber);
         queueWindow.setLocation(10,12);

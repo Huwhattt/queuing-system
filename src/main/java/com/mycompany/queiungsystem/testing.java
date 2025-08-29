@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 public class testing extends javax.swing.JFrame {
-
+    
+ public boolean hasPaid = false;
+    
     public testing() {
         initComponents();
         clearTable();
@@ -16,9 +18,9 @@ public class testing extends javax.swing.JFrame {
         payment2.setText("");
         sukli2.setText("");
         
-        jButton2.setOpaque(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setBorderPainted(false);
+        print.setOpaque(false);
+        print.setContentAreaFilled(false);
+        print.setBorderPainted(false);
         
     }
     
@@ -36,78 +38,96 @@ public class testing extends javax.swing.JFrame {
         jTable1.setModel(model);
     }
     
-    public void orderToTable(int orderNumber) {
+    public void loadSpecificOrderToTable(int orderNumber) {
+        // Check if order exists
         if (!OrderData.getAllOrderNumbers().contains(orderNumber)) {
-            JOptionPane.showMessageDialog(this,
-                    "Order number " + orderNumber + " not found!",
-                    "Order Not Found",
-                    JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, 
+                "Order number " + orderNumber + " not found!", 
+                "Order Not Found", 
+                JOptionPane.WARNING_MESSAGE);
             return;
         }
-
+        
+        // Create table model with detailed columns
         DefaultTableModel model = new DefaultTableModel(
-                new Object[][]{},
-                new String[]{"Order Number", "Item", "Quantity", "Price", "Subtotal", "Order Type", "Total Amount"}
+            new Object[][]{}, 
+            new String[]{"Order Number", "Item", "Quantity", "Price", "Subtotal", "Order Type", "Total Amount"}
         ) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-
+        
         jTable1.setModel(model);
-
+        
+        // Load specific order data
         List<String> orderItems = OrderData.getOrderByNumber(orderNumber);
         Double total = OrderData.getTotalByNumber(orderNumber);
         String type = OrderData.getOrderTypeByNumber(orderNumber);
-
-        StringBuilder items = new StringBuilder();
-        StringBuilder quantities = new StringBuilder();
-        StringBuilder prices = new StringBuilder();
-        StringBuilder subtotals = new StringBuilder();
-
+        
+        // Add order header row
+        model.addRow(new Object[]{
+            String.format("%03d", orderNumber),
+            "ORDER ITEMS:", "", "", "", type, ""
+        });
+        
+        // Parse and add each item with quantity details
         for (String item : orderItems) {
+            // Parse the order string (format: "Meal xQty - ₱Price")
             try {
                 String[] parts = item.split(" x");
                 String mealName = parts[0];
-
+                
                 String[] rest = parts[1].split(" - ₱");
                 int quantity = Integer.parseInt(rest[0]);
                 double subtotal = Double.parseDouble(rest[1]);
                 double unitPrice = subtotal / quantity;
-
-                items.append(mealName).append(", ");
-                quantities.append(quantity).append(", ");
-                prices.append("₱").append(String.format("%.2f", unitPrice)).append(", ");
-                subtotals.append("₱").append(String.format("%.2f", subtotal)).append(", ");
-
+                
+                // Add item row with quantity details
+                model.addRow(new Object[]{
+                    "", // Empty order number for item rows
+                    mealName,
+                    quantity,
+                    "₱" + String.format("%.2f", unitPrice),
+                    "₱" + String.format("%.2f", subtotal),
+                    "", // Empty order type for item rows
+                    ""  // Empty total for item rows
+                });
+                
             } catch (Exception e) {
-                items.append(item).append(", ");
-                quantities.append("N/A, ");
-                prices.append("N/A, ");
-                subtotals.append("N/A, ");
+                // If parsing fails, just add the raw string
+                model.addRow(new Object[]{
+                    "",
+                    item,
+                    "N/A",
+                    "N/A",
+                    "N/A",
+                    "",
+                    ""
+                });
             }
         }
-
-        if (items.length() > 0) {
-            items.setLength(items.length() - 2);
-        }
-        if (quantities.length() > 0) {
-            quantities.setLength(quantities.length() - 2);
-        }
-        if (prices.length() > 0) {
-            prices.setLength(prices.length() - 2);
-        }
-        if (subtotals.length() > 0) {
-            subtotals.setLength(subtotals.length() - 2);
-        }
-
+        
+        // Add total row
         model.addRow(new Object[]{
-            String.format("%03d", orderNumber), items.toString(), quantities.toString(), prices.toString(), subtotals.toString(), type, "₱" + String.format("%.2f", total) 
+            "",
+            "TOTAL:",
+            "",
+            "",
+            "",
+            "",
+            "₱" + String.format("%.2f", total)
         });
+        
+        int lastRow = model.getRowCount() - 1;
+Object totalValue = model.getValueAt(lastRow, 6); // column 6 = "Total Amount"
 
-        totalprice2.setText("₱" + String.format("%.2f", total));
-
+if (totalValue != null) {
+    totalprice2.setText(totalValue.toString()); // set text directly
+}
+        
+        // Auto-resize columns to fit content
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
     }
     private void searchForOrder() {
@@ -122,7 +142,7 @@ public class testing extends javax.swing.JFrame {
             }
 
             int orderNumber = Integer.parseInt(input);
-            orderToTable(orderNumber);
+            loadSpecificOrderToTable(orderNumber);
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this,
@@ -141,12 +161,11 @@ public class testing extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         search = new javax.swing.JButton();
-        pay = new javax.swing.JButton();
         totalprice2 = new javax.swing.JLabel();
         payment2 = new javax.swing.JTextField();
         sukli2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        pay = new javax.swing.JButton();
+        print = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -180,23 +199,24 @@ public class testing extends javax.swing.JFrame {
             }
         });
 
-        pay.setBorderPainted(false);
-        pay.setContentAreaFilled(false);
+        payment2.setBorder(null);
+        payment2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                payment2ActionPerformed(evt);
+            }
+        });
+
         pay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 payActionPerformed(evt);
             }
         });
 
-        payment2.setBorder(null);
-
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        print.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                printActionPerformed(evt);
             }
         });
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/addtemp.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -205,64 +225,51 @@ public class testing extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(480, 480, 480)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(480, 480, 480)
-                        .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(totalprice2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(270, 270, 270)
-                        .addComponent(pay, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sukli2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(payment2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(140, 140, 140))
+                        .addGap(130, 130, 130)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(sukli2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(payment2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(totalprice2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(print, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pay, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(480, 480, 480)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(298, 298, 298)
-                                .addComponent(payment2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(70, 70, 70)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(268, 268, 268)
-                                .addComponent(pay, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(totalprice2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(298, 298, 298)
+                        .addComponent(payment2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(totalprice2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(sukli2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pay, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(print, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -287,15 +294,49 @@ public class testing extends javax.swing.JFrame {
      searchForOrder();
     }//GEN-LAST:event_searchActionPerformed
 
+    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
+      if (!hasPaid) {
+        JOptionPane.showMessageDialog(this, "You need to make a Transaction");
+        return;
+    } 
+      
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+    if (model.getRowCount() == 0) {
+        JOptionPane.showMessageDialog(this, "No data to print.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    String total = totalprice2.getText();
+    String payment = payment2.getText();
+    String change = sukli2.getText();
+    String orderType = model.getValueAt(0, 5).toString();
+
+    // ✅ Create the resibo2 frame using the default constructor
+    resibo2 receipt = new resibo2();
+
+    // ✅ Send the data using your new method
+    receipt.loadReceiptData(model, total, payment, change, orderType);
+
+    // ✅ Show the receipt window
+    receipt.setVisible(true);
+    
+    clearTable();
+    }//GEN-LAST:event_printActionPerformed
+
+    private void payment2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payment2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_payment2ActionPerformed
+
     private void payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payActionPerformed
-        
         try {
         String totalText = totalprice2.getText().replace("₱", "").trim();
         double total = Double.parseDouble(totalText);
 
         double payment = Double.parseDouble(payment2.getText().trim());
-
+        payment2.setText("₱" + String.format("%.2f", payment));
         if (payment < total) {
+            hasPaid=false;
             JOptionPane.showMessageDialog(this,
                     "Insufficient Amount",
                     "Payment Error",
@@ -304,27 +345,22 @@ public class testing extends javax.swing.JFrame {
             double change = payment - total;
 
             sukli2.setText("₱" + String.format("%.2f", change));
-
+            hasPaid=true;
             JOptionPane.showMessageDialog(this,
                     "Payment Successful!",
                     "Transaction Complete",
                     JOptionPane.INFORMATION_MESSAGE);
             
-            clearTable();
+            
         }
     } catch (NumberFormatException e) {
+        hasPaid=false;
         JOptionPane.showMessageDialog(this,
                 "Please enter a valid payment amount!",
                 "Invalid Input",
                 JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_payActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    resibo2 res = new resibo2();
-    res.setVisible(true);
-    res.sendToReceipt();
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,14 +399,13 @@ public class testing extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton pay;
     public javax.swing.JTextField payment2;
+    private javax.swing.JButton print;
     private javax.swing.JButton search;
     public javax.swing.JLabel sukli2;
     public javax.swing.JLabel totalprice2;

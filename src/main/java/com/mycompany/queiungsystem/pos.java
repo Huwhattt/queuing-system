@@ -245,7 +245,7 @@ public class pos extends javax.swing.JFrame {
         jPanel1.add(combobox);
         combobox.setBounds(226, 260, 150, 40);
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cashier.png"))); // NOI18N
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cashier.png"))); // NOI18N
         jPanel1.add(background);
         background.setBounds(0, 0, 710, 360);
 

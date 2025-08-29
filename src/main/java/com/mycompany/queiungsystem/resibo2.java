@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -28,17 +29,7 @@ public class resibo2 extends javax.swing.JFrame {
         resiboTable.getColumnModel().getColumn(1).setPreferredWidth(100);
         resiboTable.getColumnModel().getColumn(2).setPreferredWidth(30);
         
-          receiptModel = new DefaultTableModel(
-            new Object[][]{},
-            new String[]{"Qty", "Item", "Price"}
-        ) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
 
-        resiboTable.setModel(receiptModel); 
         
         //-----------------------------------------------------------------------------------//
         
@@ -59,25 +50,23 @@ public class resibo2 extends javax.swing.JFrame {
             }
                 ref.setText(refNumBuilder.toString());
     } 
-    public void sendToReceipt() {
-        resibo2 receiptFrame = new resibo2(); // create the receipt frame
-
-        DefaultTableModel receiptModel = new DefaultTableModel(
-            new Object[][]{}, 
-            new String[]{"Qty", "Item", "Price"}
-    )   {
+  
+    
+    public void loadReceiptData(DefaultTableModel sourceModel, String total, String payment, String change, String orderType) {
+    DefaultTableModel receiptModel = new DefaultTableModel(
+        new Object[][]{},
+        new String[]{"Qty", "Item", "Price"}
+    ) {
         @Override
         public boolean isCellEditable(int row, int column) {
             return false;
         }
     };
 
-        testing tes = new testing();
-        DefaultTableModel model = (DefaultTableModel) tes.jTable1.getModel();
-            for (int i = 0; i < model.getRowCount(); i++) {
-                Object qty = model.getValueAt(i, 2);    // Quantity
-                Object item = model.getValueAt(i, 1);   // Item
-                Object price = model.getValueAt(i, 3);  // Price
+    for (int i = 0; i < sourceModel.getRowCount(); i++) {
+        Object qty = sourceModel.getValueAt(i, 2);
+        Object item = sourceModel.getValueAt(i, 1);
+        Object price = sourceModel.getValueAt(i, 3);
 
         if (qty != null && item != null && price != null &&
             !qty.toString().isEmpty() && !item.toString().equals("ORDER ITEMS:")) {
@@ -85,17 +74,13 @@ public class resibo2 extends javax.swing.JFrame {
         }
     }
 
-    
-    receiptFrame.resiboTable.setModel(receiptModel);
-
-   
-    receiptFrame.totalprice.setText(tes.totalprice2.getText());
-    receiptFrame.bayad.setText(tes.payment2.getText());
-    receiptFrame.suklimo.setText(tes.sukli2.getText());
-
-    
-    receiptFrame.setVisible(true);
+    resiboTable.setModel(receiptModel);
+    totalprice.setText(total);
+    bayad.setText(payment);
+    suklimo.setText(change);
+    serv.setText(orderType);
 }
+    
     
 
     /**
@@ -117,6 +102,7 @@ public class resibo2 extends javax.swing.JFrame {
         totalprice = new javax.swing.JLabel();
         bayad = new javax.swing.JLabel();
         suklimo = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         bakgrounf = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -139,9 +125,10 @@ public class resibo2 extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(250, 170, 210, 110);
 
+        serv.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
         serv.setText("jLabel2");
         jPanel1.add(serv);
-        serv.setBounds(340, 150, 38, 16);
+        serv.setBounds(330, 150, 60, 14);
 
         ref.setText("jLabel3");
         jPanel1.add(ref);
@@ -149,11 +136,11 @@ public class resibo2 extends javax.swing.JFrame {
 
         date.setText("jLabel4");
         jPanel1.add(date);
-        date.setBounds(300, 130, 38, 16);
+        date.setBounds(300, 130, 60, 16);
 
         time.setText("jLabel5");
         jPanel1.add(time);
-        time.setBounds(410, 130, 38, 16);
+        time.setBounds(410, 130, 60, 16);
 
         totalprice.setText("jLabel6");
         jPanel1.add(totalprice);
@@ -166,6 +153,15 @@ public class resibo2 extends javax.swing.JFrame {
         suklimo.setText("jLabel8");
         jPanel1.add(suklimo);
         suklimo.setBounds(410, 313, 50, 16);
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(520, 280, 150, 50);
 
         bakgrounf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/receipt.png"))); // NOI18N
         jPanel1.add(bakgrounf);
@@ -184,6 +180,13 @@ public class resibo2 extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      JOptionPane.showMessageDialog(this, "Transaction Successful!");
+      testing t = new testing();
+      t.setVisible(true);
+      dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,15 +226,16 @@ public class resibo2 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bakgrounf;
-    private javax.swing.JLabel bayad;
+    public javax.swing.JLabel bayad;
     private javax.swing.JLabel date;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel ref;
-    private javax.swing.JTable resiboTable;
-    private javax.swing.JLabel serv;
-    private javax.swing.JLabel suklimo;
+    public javax.swing.JTable resiboTable;
+    public javax.swing.JLabel serv;
+    public javax.swing.JLabel suklimo;
     private javax.swing.JLabel time;
-    private javax.swing.JLabel totalprice;
+    public javax.swing.JLabel totalprice;
     // End of variables declaration//GEN-END:variables
 }
