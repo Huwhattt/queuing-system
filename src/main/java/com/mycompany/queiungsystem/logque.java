@@ -163,7 +163,7 @@ public class logque extends javax.swing.JFrame {
 
         for (int i = 0; i < usernames.size(); i++) {
             if (enteredUser.equals(usernames.get(i)) && enteredPass.equals(passwords.get(i))) {
-                JOptionPane.showMessageDialog(this, "Access Granted");
+                JOptionPane.showMessageDialog(this, "Access Granted!");
 
                 KFrame.callscreens();
                 

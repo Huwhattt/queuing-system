@@ -161,7 +161,35 @@ public class kitchen extends javax.swing.JFrame {
                     "Order Missing",
                     JOptionPane.WARNING_MESSAGE);
         }
+    } 
+    
+    public void markOrderReady(int index, JTextArea orderArea) {
+        String orderText = kitchenOrders[index].getText();
+
+        if (orderText != null && !orderText.trim().isEmpty()) {
+            String[] lines = orderText.split("\n");
+            if (lines.length > 0) {
+                String orderNum = lines[0].trim();
+                System.out.println("Looking for orderNum: '" + orderNum + "'");
+                markOrderAsReady(orderNum);
+                orderArea.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid order format.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No order found to mark ready.");
+        }
     }
+    
+    public void readyFirst() {
+        for (int i = 0; i < kitchenOrders.length; i++) {
+            if (kitchenOrders[i].getText() != null && !kitchenOrders[i].getText().trim().isEmpty()) {
+                markOrderReady(i, kitchenOrders[i]);
+                break;
+            }
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -317,81 +345,27 @@ public class kitchen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ready1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ready1ActionPerformed
-        String orderText = kitchenOrders[0].getText();
-
-        if (orderText != null && !orderText.trim().isEmpty()) {
-            String orderNum = orderText.split(" ")[0];
-            markOrderAsReady(orderNum);
-            order1.setText("");
-            
-        } else {
-            JOptionPane.showMessageDialog(null, "No order found to mark ready.");
-        }     
+        readyFirst();  
     }//GEN-LAST:event_ready1ActionPerformed
 
     private void ready2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ready2ActionPerformed
-        String orderText = kitchenOrders[1].getText();
-
-        if (orderText != null && !orderText.trim().isEmpty()) {
-            String orderNum = orderText.split(" ")[0];
-            markOrderAsReady(orderNum);
-            order2.setText("");
-
-        } else {
-            JOptionPane.showMessageDialog(null, "No order found to mark ready.");
-        }
+        readyFirst();
     }//GEN-LAST:event_ready2ActionPerformed
 
     private void ready3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ready3ActionPerformed
-        String orderText = kitchenOrders[2].getText();
-
-        if (orderText != null && !orderText.trim().isEmpty()) {
-            String orderNum = orderText.split(" ")[0];
-            markOrderAsReady(orderNum);
-            order3.setText("");
-
-        } else {
-            JOptionPane.showMessageDialog(null, "No order found to mark ready.");
-        }
+        readyFirst();
     }//GEN-LAST:event_ready3ActionPerformed
 
     private void ready4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ready4ActionPerformed
-        String orderText = kitchenOrders[3].getText();
-
-        if (orderText != null && !orderText.trim().isEmpty()) {
-            String orderNum = orderText.split(" ")[0];
-            markOrderAsReady(orderNum);
-            order4.setText("");
-            
-        } else {
-            JOptionPane.showMessageDialog(null, "No order found to mark ready.");
-        }
+        readyFirst();
     }//GEN-LAST:event_ready4ActionPerformed
 
     private void ready5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ready5ActionPerformed
-        String orderText = kitchenOrders[4].getText();
-
-        if (orderText != null && !orderText.trim().isEmpty()) {
-            String orderNum = orderText.split(" ")[0];
-            markOrderAsReady(orderNum);
-            order5.setText("");
-            
-        } else {
-            JOptionPane.showMessageDialog(null, "No order found to mark ready.");
-        }
+        readyFirst();
     }//GEN-LAST:event_ready5ActionPerformed
 
     private void ready6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ready6ActionPerformed
-        String orderText = kitchenOrders[5].getText();
-
-        if (orderText != null && !orderText.trim().isEmpty()) {
-            String orderNum = orderText.split(" ")[0];
-            markOrderAsReady(orderNum);
-            order6.setText("");
-            
-        } else {
-            JOptionPane.showMessageDialog(null, "No order found to mark ready.");
-        }
+        readyFirst();
     }//GEN-LAST:event_ready6ActionPerformed
 
     /**

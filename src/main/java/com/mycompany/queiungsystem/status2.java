@@ -1,6 +1,7 @@
 package com.mycompany.queiungsystem;
 
 import java.awt.Color;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**

@@ -172,6 +172,53 @@ public class counter extends javax.swing.JFrame {
         }
     }
     
+    public void FIFO() {
+        for (int i = 0; i < qnoFields.length; i++) {
+            String orderNum = qnoFields[i].getText().trim();
+            String status = statFields[i].getText().trim();
+
+            if (!orderNum.isEmpty()) {
+                if (!status.equalsIgnoreCase("Ready")) {
+                    JOptionPane.showMessageDialog(this,
+                            "Order " + orderNum + " is still " + status + ". Cannot complete until it is Ready.",
+                            "Order Not Ready",
+                            JOptionPane.WARNING_MESSAGE);
+                    return;  // stop here, no completion
+                }
+
+                // Status is Ready, proceed
+                int response = JOptionPane.showConfirmDialog(this,
+                        "Mark order " + orderNum + " as completed?",
+                        "Confirm Completion",
+                        JOptionPane.YES_NO_OPTION);
+
+                if (response == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(this,
+                            "Order " + orderNum + " completed.",
+                            "Success",
+                            JOptionPane.INFORMATION_MESSAGE);
+
+                    if (KFrame.woah != null) {
+                        KFrame.woah.doneOrder(orderNum);
+                    }
+
+                    qnoFields[i].setText("");
+                    statFields[i].setText("");
+                    timeFields[i].setText("");
+
+                    return;
+                } else {
+                    return;
+                }
+            }
+        }
+
+        JOptionPane.showMessageDialog(this,
+                "No orders to complete.",
+                "Empty Queue",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+    
     public JTextField[] getQnoFields() {
         return qnoFields; 
     }
@@ -403,76 +450,31 @@ public class counter extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void completedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completedActionPerformed
-        if (!selectedOrderNumber.isEmpty()) {
-            int response = JOptionPane.showConfirmDialog(this,
-                    "Mark this order as completed?",
-                    "Confirm Completion",
-                    JOptionPane.YES_NO_OPTION);
-
-            if (response == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(this,
-                        "Order completed.",
-                        "Success",
-                        JOptionPane.INFORMATION_MESSAGE);
-
-                if (KFrame.woah != null) {
-                    KFrame.woah.doneOrder(selectedOrderNumber); 
-                }
-
-                for (int i = 0; i < qnoFields.length; i++) {
-                    if (qnoFields[i].getText().trim().equals(selectedOrderNumber)) {
-                        qnoFields[i].setText("");
-                        statFields[i].setText("");
-                        timeFields[i].setText("");
-                        break;
-                    }
-                }
-
-                selectedOrderNumber = "";
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(this,
-                    "Please click the order number first before completing.",
-                    "No Order Selected",
-                    JOptionPane.WARNING_MESSAGE);
-        }
+        FIFO();
     }//GEN-LAST:event_completedActionPerformed
 
     private void qno1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qno1MouseClicked
 
-        selectedOrderNumber = qno1.getText().trim();
-        
     }//GEN-LAST:event_qno1MouseClicked
 
     private void qno2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qno2MouseClicked
 
-        selectedOrderNumber = qno2.getText().trim();
-        
     }//GEN-LAST:event_qno2MouseClicked
 
     private void qno3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qno3ActionPerformed
 
-        selectedOrderNumber = qno3.getText().trim();
-        
     }//GEN-LAST:event_qno3ActionPerformed
 
     private void qno4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qno4MouseClicked
 
-        selectedOrderNumber = qno4.getText().trim();
-        
     }//GEN-LAST:event_qno4MouseClicked
 
     private void qno5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qno5MouseClicked
 
-        selectedOrderNumber = qno5.getText().trim();
-        
     }//GEN-LAST:event_qno5MouseClicked
 
     private void qno6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qno6MouseClicked
-
-        selectedOrderNumber = qno6.getText().trim();
-        
+ 
     }//GEN-LAST:event_qno6MouseClicked
 
     private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
