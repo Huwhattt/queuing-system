@@ -4,10 +4,11 @@ package com.mycompany.queiungsystem;
 import java.util.List;
 public class CustomersOrder extends javax.swing.JFrame {
 
-    private int orderNumber;
+    public int orderNumber;
     
     public CustomersOrder() {
         initComponents();
+        setTitle("Kiosk");
         setSize(400, 800);
         setLocation(10, 12);
         number.setText("No Order");
@@ -70,7 +71,7 @@ public class CustomersOrder extends javax.swing.JFrame {
         OrderData.total = 0.0;
         OrderData.orderType = "";
 
-        new kiosk().setVisible(true);
+        KFrame.ihbangis.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backActionPerformed
 

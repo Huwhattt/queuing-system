@@ -18,8 +18,6 @@ public class OrderData {
 
     static int currentOrderNumber = 0;
 
-    
-    
     public static void addOrder(String meal, double price, int qty) {
         String order = meal + " x" + qty + " - ₱" + String.format("%.2f", (price * qty));
         orders.add(order);
@@ -27,16 +25,22 @@ public class OrderData {
     }
 
 
+    public static int lastSavedOrderNumber = 0;
+    
     public static int saveOrder() {
+        
         currentOrderNumber++;
+        
         orderHistory.put(currentOrderNumber, new ArrayList<>(orders));
         orderTotals.put(currentOrderNumber, total);
         orderTypes.put(currentOrderNumber, orderType);
 
+        lastSavedOrderNumber = currentOrderNumber;
 
         resetOrder();
 
         return currentOrderNumber;
+        
     }
 
 

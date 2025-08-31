@@ -1,6 +1,4 @@
-
 package com.mycompany.queiungsystem;
-
 
 public class kiosk extends javax.swing.JFrame {
 
@@ -8,6 +6,7 @@ public class kiosk extends javax.swing.JFrame {
         initComponents();
         setSize(400, 800);
         setLocation(10, 12); 
+        setTitle("Kiosk");
     }
     
     @SuppressWarnings("unchecked")

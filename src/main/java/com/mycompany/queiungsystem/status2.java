@@ -1,8 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.queiungsystem;
+
+import java.awt.Color;
+import javax.swing.JTextField;
 
 /**
  *
@@ -12,13 +11,122 @@ public class status2 extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(status2.class.getName());
 
-    /**
-     * Creates new form status2
-     */
+    private JTextField[] prepOrders;
+    private JTextField[] readyOrders;
+    
     public status2() {
         initComponents();
+        
         setSize(404,400);
         setLocation(1124, 12);
+        
+        setTitle("Status Screen");
+        
+        prepOrders = new JTextField[]{prep1, prep2, prep3, prep4, prep5, prep6};
+        readyOrders = new JTextField[]{ready1, ready2, ready3, ready4, ready5, ready6};
+
+        prep1.setEditable(false);
+        prep2.setEditable(false);
+        prep3.setEditable(false);
+        prep4.setEditable(false);
+        prep5.setEditable(false);
+        prep6.setEditable(false);
+        
+        prep1.setOpaque(false);
+        prep1.setBorder(null);
+        prep1.setBackground(new Color(0, 0, 0, 0));
+
+        prep2.setOpaque(false);
+        prep2.setBorder(null);
+        prep2.setBackground(new Color(0, 0, 0, 0));
+
+        prep3.setOpaque(false);
+        prep3.setBorder(null);
+        prep3.setBackground(new Color(0, 0, 0, 0));
+        
+        prep4.setOpaque(false);
+        prep4.setBorder(null);
+        prep4.setBackground(new Color(0, 0, 0, 0));
+
+        prep5.setOpaque(false);
+        prep5.setBorder(null);
+        prep5.setBackground(new Color(0, 0, 0, 0));
+
+        prep6.setOpaque(false);
+        prep6.setBorder(null);
+        prep6.setBackground(new Color(0, 0, 0, 0));
+
+        ready1.setEditable(false);
+        ready2.setEditable(false);
+        ready3.setEditable(false);
+        ready4.setEditable(false);
+        ready5.setEditable(false);
+        ready6.setEditable(false);
+        
+        ready1.setOpaque(false);
+        ready1.setBorder(null);
+        ready1.setBackground(new Color(0, 0, 0, 0));
+
+        ready2.setOpaque(false);
+        ready2.setBorder(null);
+        ready2.setBackground(new Color(0, 0, 0, 0));
+
+        ready3.setOpaque(false);
+        ready3.setBorder(null);
+        ready3.setBackground(new Color(0, 0, 0, 0));
+        
+        ready4.setOpaque(false);
+        ready4.setBorder(null);
+        ready4.setBackground(new Color(0, 0, 0, 0));
+
+        ready5.setOpaque(false);
+        ready5.setBorder(null);
+        ready5.setBackground(new Color(0, 0, 0, 0));
+
+        ready6.setOpaque(false);
+        ready6.setBorder(null);
+        ready6.setBackground(new Color(0, 0, 0, 0));
+        
+    }
+    
+    public void setOrderNumber(String orderNumber) {
+        for (JTextField prepOrders : prepOrders) {
+            if (prepOrders.getText().isEmpty()) {
+                prepOrders.setText(orderNumber);
+                break;
+            }
+        }
+    }
+
+    public void setOrderReady(String orderNum) {
+        if (orderNum == null || orderNum.trim().isEmpty()) {
+            return;
+        }
+
+        orderNum = orderNum.trim();
+
+        for (int i = 0; i < prepOrders.length; i++) {
+            if (orderNum.equals(prepOrders[i].getText().trim())) {
+
+                readyOrders[i].setText(orderNum);
+
+                prepOrders[i].setText("");
+                break;  
+            }
+        }
+    }
+    
+    public void doneOrder(String orderNumber) {
+        for (JTextField readyField : readyOrders) {
+            if (readyField.getText().equals(orderNumber)) {
+                readyField.setText(""); 
+                break;
+            }
+        }
+    }
+    
+    public JTextField[] getPrepOrders() {
+        return prepOrders;
     }
 
     /**
@@ -30,22 +138,50 @@ public class status2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        prep1 = new javax.swing.JTextField();
+        prep2 = new javax.swing.JTextField();
+        prep3 = new javax.swing.JTextField();
+        prep4 = new javax.swing.JTextField();
+        prep5 = new javax.swing.JTextField();
+        prep6 = new javax.swing.JTextField();
+        ready1 = new javax.swing.JTextField();
+        ready2 = new javax.swing.JTextField();
+        ready3 = new javax.swing.JTextField();
+        ready4 = new javax.swing.JTextField();
+        ready5 = new javax.swing.JTextField();
+        ready6 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
+        getContentPane().add(prep1);
+        prep1.setBounds(20, 140, 60, 40);
+        getContentPane().add(prep2);
+        prep2.setBounds(120, 140, 60, 40);
+        getContentPane().add(prep3);
+        prep3.setBounds(20, 220, 60, 40);
+        getContentPane().add(prep4);
+        prep4.setBounds(120, 220, 60, 40);
+        getContentPane().add(prep5);
+        prep5.setBounds(20, 300, 60, 40);
+        getContentPane().add(prep6);
+        prep6.setBounds(120, 300, 60, 40);
+        getContentPane().add(ready1);
+        ready1.setBounds(230, 140, 60, 40);
+        getContentPane().add(ready2);
+        ready2.setBounds(310, 140, 60, 40);
+        getContentPane().add(ready3);
+        ready3.setBounds(230, 220, 60, 40);
+        getContentPane().add(ready4);
+        ready4.setBounds(310, 220, 60, 40);
+        getContentPane().add(ready5);
+        ready5.setBounds(230, 300, 60, 40);
+        getContentPane().add(ready6);
+        ready6.setBounds(310, 300, 60, 40);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Arabelle Donor\\Downloads\\queuing-system-master (1)\\queuing-system\\src\\main\\resources\\images\\stats.png")); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Arabelle Donor\\Downloads\\queuing-system-master\\queuing-system\\src\\main\\resources\\images\\stats.png")); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 390, 400);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -77,5 +213,17 @@ public class status2 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField prep1;
+    private javax.swing.JTextField prep2;
+    private javax.swing.JTextField prep3;
+    private javax.swing.JTextField prep4;
+    private javax.swing.JTextField prep5;
+    private javax.swing.JTextField prep6;
+    private javax.swing.JTextField ready1;
+    private javax.swing.JTextField ready2;
+    private javax.swing.JTextField ready3;
+    private javax.swing.JTextField ready4;
+    private javax.swing.JTextField ready5;
+    private javax.swing.JTextField ready6;
     // End of variables declaration//GEN-END:variables
 }

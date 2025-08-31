@@ -25,6 +25,10 @@ public class resibo2 extends javax.swing.JFrame {
         setTitle("Receipt");
         setLocation(407,12);
         
+        jButton1.setContentAreaFilled(false);
+        jButton1.setBorderPainted(false);
+        jButton1.setOpaque(false);
+        
         resiboTable.getColumnModel().getColumn(0).setPreferredWidth(20);
         resiboTable.getColumnModel().getColumn(1).setPreferredWidth(100);
         resiboTable.getColumnModel().getColumn(2).setPreferredWidth(30);
@@ -154,7 +158,6 @@ public class resibo2 extends javax.swing.JFrame {
         jPanel1.add(suklimo);
         suklimo.setBounds(410, 313, 50, 16);
 
-        jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

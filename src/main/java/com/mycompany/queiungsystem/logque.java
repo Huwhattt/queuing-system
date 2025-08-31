@@ -12,6 +12,8 @@ public class logque extends javax.swing.JFrame {
     
     public logque() {
         initComponents();
+        
+        setTitle("Employee Login");
         setSize(1112,797);
         setResizable(false);
         loadAccountsFromFile();
@@ -73,7 +75,7 @@ public class logque extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(1100, 800));
         setResizable(false);
         setSize(new java.awt.Dimension(1100, 800));
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pfield.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
@@ -91,8 +93,7 @@ public class logque extends javax.swing.JFrame {
                 pfieldActionPerformed(evt);
             }
         });
-        getContentPane().add(pfield);
-        pfield.setBounds(500, 480, 330, 20);
+        getContentPane().add(pfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 478, 330, -1));
 
         inuser.setBorder(null);
         inuser.setOpaque(false);
@@ -102,8 +103,7 @@ public class logque extends javax.swing.JFrame {
                 inuserActionPerformed(evt);
             }
         });
-        getContentPane().add(inuser);
-        inuser.setBounds(500, 430, 330, 20);
+        getContentPane().add(inuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(496, 430, 334, 30));
 
         reg.setOpaque(false);
         reg.setContentAreaFilled(false);
@@ -113,8 +113,7 @@ public class logque extends javax.swing.JFrame {
                 regActionPerformed(evt);
             }
         });
-        getContentPane().add(reg);
-        reg.setBounds(640, 520, 190, 50);
+        getContentPane().add(reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 520, 190, 50));
 
         login.setOpaque(false);
         login.setContentAreaFilled(false);
@@ -127,8 +126,7 @@ public class logque extends javax.swing.JFrame {
                 loginActionPerformed(evt);
             }
         });
-        getContentPane().add(login);
-        login.setBounds(290, 520, 140, 50);
+        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 520, 140, 50));
 
         clear.setOpaque(false);
         clear.setContentAreaFilled(false);
@@ -138,12 +136,10 @@ public class logque extends javax.swing.JFrame {
                 clearActionPerformed(evt);
             }
         });
-        getContentPane().add(clear);
-        clear.setBounds(470, 520, 140, 50);
+        getContentPane().add(clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 520, 140, 50));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login.png"))); // NOI18N
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 1120, 800);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 800));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -169,17 +165,10 @@ public class logque extends javax.swing.JFrame {
             if (enteredUser.equals(usernames.get(i)) && enteredPass.equals(passwords.get(i))) {
                 JOptionPane.showMessageDialog(this, "Access Granted");
 
-                kitchen k = new kitchen();
-                k.setVisible(true);
+                KFrame.callscreens();
                 
                 testing t = new testing();
                 t.setVisible(true);
-                
-                counter c = new counter();
-                c.setVisible(true);
-                
-                status2 s = new status2();
-                s.setVisible(true);
                 
                 dispose();
                 return;

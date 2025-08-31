@@ -11,6 +11,7 @@ public class cart extends javax.swing.JFrame {
         initComponents();
         setSize(400, 800);
         setLocation(10, 12);
+        setTitle("Kiosk");
         StringBuilder sb = new StringBuilder();
         for (String order : OrderData.orders) {
             sb.append(order).append("\n");
@@ -98,10 +99,8 @@ public class cart extends javax.swing.JFrame {
 
 
         JOptionPane.showMessageDialog(this, "Your order has been cancelled.");
-
-
-        kiosk ah = new kiosk();
-        ah.setVisible(true);
+        
+        KFrame.ihbangis.setVisible(true);
         this.dispose();
 
     } else if (choice == javax.swing.JOptionPane.NO_OPTION) {
@@ -112,21 +111,23 @@ public class cart extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void proceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedActionPerformed
+        
         if (OrderData.orders.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Your cart is empty!");
             return;
         }
 
         int orderNumber = OrderData.saveOrder();
-        
+
         testing t = new testing();
         t.loadSpecificOrderToTable(orderNumber);
 
         CustomersOrder queueWindow = new CustomersOrder(orderNumber);
-        queueWindow.setLocation(10,12);
+        queueWindow.setLocation(10, 12);
         queueWindow.setVisible(true);
         
         this.dispose();
+        
     }//GEN-LAST:event_proceedActionPerformed
 
    
