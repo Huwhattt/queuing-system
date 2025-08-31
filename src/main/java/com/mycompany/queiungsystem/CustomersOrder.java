@@ -4,14 +4,21 @@ package com.mycompany.queiungsystem;
 import java.util.List;
 public class CustomersOrder extends javax.swing.JFrame {
 
-    private int orderNumber;
+    public int orderNumber;
+    
+    public CustomersOrder() {
+        initComponents();
+        setTitle("Kiosk");
+        setSize(400, 800);
+        setLocation(10, 12);
+        number.setText("No Order");
+    }
+
     public CustomersOrder(int orderNumber) {
         initComponents();
         this.orderNumber = orderNumber;
 
-
         number.setText(String.format("%03d", orderNumber));
-
 
         List<String> orders = OrderData.getOrderByNumber(orderNumber);
         double total = OrderData.getTotalByNumber(orderNumber);
@@ -21,13 +28,7 @@ public class CustomersOrder extends javax.swing.JFrame {
             System.out.println("Total: " + total);
         }
     }
-    public CustomersOrder() {
-        initComponents();
-        number.setText("No Order");
-    }
-
-
-  
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -70,7 +71,7 @@ public class CustomersOrder extends javax.swing.JFrame {
         OrderData.total = 0.0;
         OrderData.orderType = "";
 
-        new logque().setVisible(true);
+        KFrame.ihbangis.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backActionPerformed
 

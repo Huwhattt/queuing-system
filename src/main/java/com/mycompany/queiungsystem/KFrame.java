@@ -10,8 +10,16 @@ package com.mycompany.queiungsystem;
  */
 public class KFrame {
     
-    public static kitchen yey;
-    public static status woah;
+    public static final kitchen yey = new kitchen();
+    public static final status2 woah = new status2(); 
+    public static final counter panis = new counter();
+    public static final kiosk ihbangis = new kiosk();
+
+    public static void callscreens() {
+        yey.setVisible(true);
+        woah.setVisible(true);
+        panis.setVisible(true);
+    }
     
-    public static status statusFrame = null;
+    public static CustomersOrder hi;  
 }

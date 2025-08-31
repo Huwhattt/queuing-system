@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
+              <Component id="qno2" min="-2" pref="40" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="130" pref="130" max="-2" attributes="0"/>
+              <Component id="stat4" min="-2" pref="80" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
+              <Component id="qno1" min="-2" pref="40" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="240" pref="240" max="-2" attributes="0"/>
+              <Component id="time2" min="-2" pref="70" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="240" pref="240" max="-2" attributes="0"/>
+              <Component id="time4" min="-2" pref="70" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="240" pref="240" max="-2" attributes="0"/>
+              <Component id="time3" min="-2" pref="70" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
+              <Component id="qno4" min="-2" pref="40" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="130" pref="130" max="-2" attributes="0"/>
+              <Component id="stat3" min="-2" pref="80" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="240" pref="240" max="-2" attributes="0"/>
+              <Component id="time1" min="-2" pref="70" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
+              <Component id="qno6" min="-2" pref="40" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="320" pref="320" max="-2" attributes="0"/>
+              <Component id="completed" min="-2" pref="70" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="130" pref="130" max="-2" attributes="0"/>
+              <Component id="stat6" min="-2" pref="80" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="130" pref="130" max="-2" attributes="0"/>
+              <Component id="stat5" min="-2" pref="80" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="240" pref="240" max="-2" attributes="0"/>
+              <Component id="time6" min="-2" pref="70" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="130" pref="130" max="-2" attributes="0"/>
+              <Component id="stat2" min="-2" pref="80" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="240" pref="240" max="-2" attributes="0"/>
+              <Component id="time5" min="-2" pref="70" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
+              <Component id="qno5" min="-2" pref="40" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
+              <Component id="qno3" min="-2" pref="40" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="320" pref="320" max="-2" attributes="0"/>
+              <Component id="refresh" min="-2" pref="70" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="130" pref="130" max="-2" attributes="0"/>
+              <Component id="stat1" min="-2" pref="80" max="-2" attributes="0"/>
+          </Group>
+          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace min="120" pref="120" max="-2" attributes="0"/>
+              <Component id="completed" min="-2" pref="30" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="235" max="-2" attributes="0"/>
+              <Component id="qno4" min="-2" pref="32" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+              <Component id="qno6" min="-2" pref="32" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="160" pref="160" max="-2" attributes="0"/>
+              <Component id="refresh" min="-2" pref="30" max="-2" attributes="0"/>
+          </Group>
+          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="160" pref="160" max="-2" attributes="0"/>
+                      <Component id="qno2" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="120" pref="120" max="-2" attributes="0"/>
+                      <Component id="qno1" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="200" pref="200" max="-2" attributes="0"/>
+                      <Component id="qno3" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+              <Component id="qno5" min="-2" pref="30" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="240" pref="240" max="-2" attributes="0"/>
+                      <Component id="stat4" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="200" pref="200" max="-2" attributes="0"/>
+                      <Component id="stat3" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="160" pref="160" max="-2" attributes="0"/>
+                      <Component id="stat2" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="120" pref="120" max="-2" attributes="0"/>
+                      <Component id="stat1" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+              <Component id="stat5" min="-2" pref="32" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+              <Component id="stat6" min="-2" pref="30" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="160" pref="160" max="-2" attributes="0"/>
+              <Component id="time2" min="-2" pref="30" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="200" pref="200" max="-2" attributes="0"/>
+              <Component id="time3" min="-2" pref="30" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="120" pref="120" max="-2" attributes="0"/>
+              <Component id="time1" min="-2" pref="30" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="240" max="-2" attributes="0"/>
+              <Component id="time4" min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="time6" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="time5" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JTextField" name="qno1">
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="qno1MouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="qno2">
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="qno2MouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="qno3">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="qno3ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="qno4">
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="qno4MouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="qno5">
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="qno5MouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="qno6">
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="qno6MouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="stat1">
+    </Component>
+    <Component class="javax.swing.JTextField" name="stat2">
+    </Component>
+    <Component class="javax.swing.JTextField" name="stat3">
+    </Component>
+    <Component class="javax.swing.JTextField" name="stat4">
+    </Component>
+    <Component class="javax.swing.JTextField" name="stat5">
+    </Component>
+    <Component class="javax.swing.JTextField" name="stat6">
+    </Component>
+    <Component class="javax.swing.JTextField" name="time1">
+    </Component>
+    <Component class="javax.swing.JTextField" name="time2">
+    </Component>
+    <Component class="javax.swing.JTextField" name="time3">
+    </Component>
+    <Component class="javax.swing.JTextField" name="time4">
+    </Component>
+    <Component class="javax.swing.JTextField" name="time5">
+    </Component>
+    <Component class="javax.swing.JTextField" name="time6">
+    </Component>
+    <Component class="javax.swing.JButton" name="completed">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="completedActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="refresh">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="refreshActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/images/counter.png"/>
+        </Property>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>

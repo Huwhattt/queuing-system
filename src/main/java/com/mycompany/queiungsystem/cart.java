@@ -3,11 +3,15 @@ package com.mycompany.queiungsystem;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 public class cart extends javax.swing.JFrame {
 
     
     public cart() {
         initComponents();
+        setSize(400, 800);
+        setLocation(10, 12);
+        setTitle("Kiosk");
         StringBuilder sb = new StringBuilder();
         for (String order : OrderData.orders) {
             sb.append(order).append("\n");
@@ -18,7 +22,6 @@ public class cart extends javax.swing.JFrame {
                           + "\nTOTAL: " + OrderData.getFormattedTotal());
         totalmenu.setEditable(false);
     }
-
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -96,10 +99,8 @@ public class cart extends javax.swing.JFrame {
 
 
         JOptionPane.showMessageDialog(this, "Your order has been cancelled.");
-
-
-        kiosk ah = new kiosk();
-        ah.setVisible(true);
+        
+        KFrame.ihbangis.setVisible(true);
         this.dispose();
 
     } else if (choice == javax.swing.JOptionPane.NO_OPTION) {
@@ -110,18 +111,23 @@ public class cart extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void proceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedActionPerformed
+        
         if (OrderData.orders.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Your cart is empty!");
-            return; 
+            return;
         }
-
 
         int orderNumber = OrderData.saveOrder();
 
+        testing t = new testing();
+        t.loadSpecificOrderToTable(orderNumber);
 
-        CustomersOrder hey = new CustomersOrder(orderNumber);
-        hey.setVisible(true);
+        CustomersOrder queueWindow = new CustomersOrder(orderNumber);
+        queueWindow.setLocation(10, 12);
+        queueWindow.setVisible(true);
+        
         this.dispose();
+        
     }//GEN-LAST:event_proceedActionPerformed
 
    

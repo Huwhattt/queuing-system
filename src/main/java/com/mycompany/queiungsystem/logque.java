@@ -11,12 +11,12 @@ public class logque extends javax.swing.JFrame {
     private List<String> passwords = new ArrayList<>();
     
     public logque() {
-        setSize(1100, 800);
-        setResizable(false);              
-        loadAccountsFromFile();
         initComponents();
-        kiosk nice = new kiosk ();
-        nice.setVisible(true);
+        
+        setTitle("Employee Login");
+        setSize(1112,797);
+        setResizable(false);
+        loadAccountsFromFile();
     }
 
    private void loadAccountsFromFile() {
@@ -48,14 +48,6 @@ public class logque extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
-    public void setnewuser(String newuser) {
-        usernames.add(newuser);
-    }
-
-    public void setnupass(String newpass) {
-        passwords.add(newpass);
-    }
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -66,16 +58,14 @@ public class logque extends javax.swing.JFrame {
         reg = new javax.swing.JButton();
         login = new javax.swing.JButton();
         clear = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(407, 12));
-        setMaximumSize(new java.awt.Dimension(1100, 800));
-        setMinimumSize(new java.awt.Dimension(1100, 800));
-        setPreferredSize(new java.awt.Dimension(1100, 800));
-        setResizable(false);
-        setSize(new java.awt.Dimension(1100, 800));
-        getContentPane().setLayout(null);
+        setMaximumSize(new java.awt.Dimension(1119, 799));
+        setMinimumSize(new java.awt.Dimension(1119, 799));
+        setSize(new java.awt.Dimension(1119, 799));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pfield.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
@@ -93,8 +83,7 @@ public class logque extends javax.swing.JFrame {
                 pfieldActionPerformed(evt);
             }
         });
-        getContentPane().add(pfield);
-        pfield.setBounds(490, 470, 350, 30);
+        getContentPane().add(pfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 478, 330, -1));
 
         inuser.setBorder(null);
         inuser.setOpaque(false);
@@ -104,8 +93,7 @@ public class logque extends javax.swing.JFrame {
                 inuserActionPerformed(evt);
             }
         });
-        getContentPane().add(inuser);
-        inuser.setBounds(490, 430, 350, 30);
+        getContentPane().add(inuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(496, 430, 334, 30));
 
         reg.setOpaque(false);
         reg.setContentAreaFilled(false);
@@ -115,8 +103,7 @@ public class logque extends javax.swing.JFrame {
                 regActionPerformed(evt);
             }
         });
-        getContentPane().add(reg);
-        reg.setBounds(650, 530, 180, 40);
+        getContentPane().add(reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 520, 190, 50));
 
         login.setOpaque(false);
         login.setContentAreaFilled(false);
@@ -129,8 +116,7 @@ public class logque extends javax.swing.JFrame {
                 loginActionPerformed(evt);
             }
         });
-        getContentPane().add(login);
-        login.setBounds(290, 530, 130, 40);
+        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 520, 140, 50));
 
         clear.setOpaque(false);
         clear.setContentAreaFilled(false);
@@ -140,16 +126,10 @@ public class logque extends javax.swing.JFrame {
                 clearActionPerformed(evt);
             }
         });
-        getContentPane().add(clear);
-        clear.setBounds(470, 530, 130, 40);
+        getContentPane().add(clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 520, 140, 50));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        jLabel1.setMaximumSize(new java.awt.Dimension(1200, 800));
-        jLabel1.setMinimumSize(new java.awt.Dimension(1200, 800));
-        jLabel1.setPreferredSize(new java.awt.Dimension(1200, 800));
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 1110, 800);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -163,21 +143,25 @@ public class logque extends javax.swing.JFrame {
     }//GEN-LAST:event_pfieldActionPerformed
 
     private void regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regActionPerformed
-        
+        reg r = new reg();
+        r.setVisible(true);
+        dispose();
     }//GEN-LAST:event_regActionPerformed
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
 
-         String enteredUser = inuser.getText().trim();
+        String enteredUser = inuser.getText().trim();
         String enteredPass = new String(pfield.getPassword()).trim();
 
         for (int i = 0; i < usernames.size(); i++) {
             if (enteredUser.equals(usernames.get(i)) && enteredPass.equals(passwords.get(i))) {
-                JOptionPane.showMessageDialog(this, "Access Granted");
-                KFrame.woah = new status();
-                KFrame.woah.setVisible(true);
-                KFrame.yey = new kitchen();
-                KFrame.yey.setVisible(true);
+                JOptionPane.showMessageDialog(this, "Access Granted!");
+
+                KFrame.callscreens();
+                
+                testing t = new testing();
+                t.setVisible(true);
+                
                 dispose();
                 return;
             }
@@ -208,7 +192,7 @@ public class logque extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clear;
     public javax.swing.JTextField inuser;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     public javax.swing.JButton login;
     private javax.swing.JPasswordField pfield;
     public javax.swing.JButton reg;
