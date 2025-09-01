@@ -154,6 +154,9 @@ public class status2 extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(404, 400));
+        setMinimumSize(new java.awt.Dimension(404, 400));
+        setPreferredSize(new java.awt.Dimension(404, 400));
         getContentPane().setLayout(null);
         getContentPane().add(prep1);
         prep1.setBounds(20, 140, 60, 40);
@@ -180,7 +183,7 @@ public class status2 extends javax.swing.JFrame {
         getContentPane().add(ready6);
         ready6.setBounds(310, 300, 60, 40);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Arabelle Donor\\Downloads\\queuing-system-master\\queuing-system\\src\\main\\resources\\images\\stats.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/stats.png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 390, 400);
 
