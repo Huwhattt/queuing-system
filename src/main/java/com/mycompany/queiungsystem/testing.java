@@ -160,10 +160,10 @@ public class testing extends javax.swing.JFrame {
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(710, 400));
-        setMinimumSize(new java.awt.Dimension(710, 400));
-        setPreferredSize(new java.awt.Dimension(710, 400));
-        setSize(new java.awt.Dimension(710, 400));
+        setMaximumSize(new java.awt.Dimension(710, 350));
+        setMinimumSize(new java.awt.Dimension(710, 350));
+        setPreferredSize(new java.awt.Dimension(710, 350));
+        setSize(new java.awt.Dimension(710, 350));
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
@@ -240,7 +240,7 @@ public class testing extends javax.swing.JFrame {
         jLabel1.setBounds(0, 0, 710, 360);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 790, 360);
+        jPanel1.setBounds(0, 0, 790, 400);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
