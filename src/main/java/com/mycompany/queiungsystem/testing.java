@@ -13,7 +13,7 @@ public class testing extends javax.swing.JFrame {
         initComponents();
         clearTable();
         setLocation(407,12);
-        setSize(710,400);
+        setSize(720,390);
         setTitle("Cashier Screen");
         
         pay.setContentAreaFilled(false);
@@ -27,6 +27,23 @@ public class testing extends javax.swing.JFrame {
         print.setOpaque(false);
         print.setContentAreaFilled(false);
         print.setBorderPainted(false);
+        
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+    @Override
+    public void keyTyped(java.awt.event.KeyEvent evt) {
+        char c = evt.getKeyChar();
+
+        // Only allow digits 0–9
+        if (!Character.isDigit(c)) {
+            evt.consume(); // stop non-digit input
+        }
+
+        // Limit to 5 characters
+        if (jTextField1.getText().length() >= 5) {
+            evt.consume(); // block more typing
+        }
+    }
+});
         
     }
     
@@ -51,6 +68,7 @@ public class testing extends javax.swing.JFrame {
                     "Order number " + orderNumber + " not found!",
                     "Order Not Found",
                     JOptionPane.WARNING_MESSAGE);
+                    jTextField1.setText("");
             return;
         }
 
@@ -140,6 +158,9 @@ public class testing extends javax.swing.JFrame {
         System.out.println("testing frame received order number: " + currentOrderNumber);
     }
     
+        
+
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -155,7 +176,9 @@ public class testing extends javax.swing.JFrame {
         sukli2 = new javax.swing.JLabel();
         pay = new javax.swing.JButton();
         print = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        clear = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        bacground = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -184,14 +207,14 @@ public class testing extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(20, 70, 380, 180);
 
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextField1.setBorder(null);
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
         jPanel1.add(jTextField1);
-        jTextField1.setBounds(480, 130, 130, 30);
+        jTextField1.setBounds(484, 153, 130, 25);
 
         search.setBorderPainted(false);
         search.setContentAreaFilled(false);
@@ -232,12 +255,32 @@ public class testing extends javax.swing.JFrame {
         jPanel1.add(print);
         print.setBounds(270, 310, 124, 40);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cashier (1).png"))); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(710, 350));
-        jLabel1.setMinimumSize(new java.awt.Dimension(710, 350));
-        jLabel1.setPreferredSize(new java.awt.Dimension(710, 350));
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 710, 360);
+        clear.setBorderPainted(false);
+        clear.setContentAreaFilled(false);
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearActionPerformed(evt);
+            }
+        });
+        jPanel1.add(clear);
+        clear.setBounds(616, 160, 10, 10);
+
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2);
+        jButton2.setBounds(220, 0, 190, 50);
+
+        bacground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/addorder.png"))); // NOI18N
+        bacground.setMaximumSize(new java.awt.Dimension(710, 350));
+        bacground.setMinimumSize(new java.awt.Dimension(710, 350));
+        bacground.setPreferredSize(new java.awt.Dimension(710, 350));
+        jPanel1.add(bacground);
+        bacground.setBounds(0, 0, 710, 360);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 790, 400);
@@ -339,6 +382,16 @@ public class testing extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_payActionPerformed
 
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+      jTextField1.setText("");
+    }//GEN-LAST:event_clearActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        history his = new history();
+        his.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -375,8 +428,10 @@ public class testing extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel bacground;
+    private javax.swing.JButton clear;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable1;

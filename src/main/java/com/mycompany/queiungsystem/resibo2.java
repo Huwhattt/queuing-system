@@ -158,6 +158,8 @@ public class resibo2 extends javax.swing.JFrame {
         jPanel1.add(suklimo);
         suklimo.setBounds(410, 313, 50, 16);
 
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -185,10 +187,20 @@ public class resibo2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      JOptionPane.showMessageDialog(this, "Transaction Successful!");
-      testing t = new testing();
-      t.setVisible(true);
-      dispose();
+    JOptionPane.showMessageDialog(this, "Transaction Successful!");
+    testing t = new testing();
+    
+    
+    String reference = ref.getText();
+    String dateVal = date.getText();
+    String total = totalprice.getText();
+
+    // Add to history table
+    history.historyTableModel.addRow(new Object[]{reference, dateVal, total});
+      
+    t.setVisible(true);
+    dispose();
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -230,15 +242,15 @@ public class resibo2 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bakgrounf;
     public javax.swing.JLabel bayad;
-    private javax.swing.JLabel date;
+    public javax.swing.JLabel date;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel ref;
+    public javax.swing.JLabel ref;
     public javax.swing.JTable resiboTable;
     public javax.swing.JLabel serv;
     public javax.swing.JLabel suklimo;
-    private javax.swing.JLabel time;
+    public javax.swing.JLabel time;
     public javax.swing.JLabel totalprice;
     // End of variables declaration//GEN-END:variables
 }
