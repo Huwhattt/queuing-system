@@ -37,7 +37,7 @@ public class resibo2 extends javax.swing.JFrame {
         jScrollPane1.setOpaque(false);
         jScrollPane1.getViewport().setOpaque(false);
 
-// Make the table transparent
+
         resiboTable.setOpaque(false);
         resiboTable.setShowGrid(false); 
 
@@ -45,7 +45,6 @@ public class resibo2 extends javax.swing.JFrame {
         jScrollPane1.setOpaque(false);
         jScrollPane1.getViewport().setOpaque(false);
 
-// Remove table borders + transparency
         resiboTable.setBorder(null);
         resiboTable.setShowGrid(false);
         resiboTable.setOpaque(false);

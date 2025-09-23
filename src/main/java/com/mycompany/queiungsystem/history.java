@@ -21,11 +21,11 @@ public class history extends javax.swing.JFrame {
            
 
         
-         lame.setModel(historyTableModel);
-            DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-centerRenderer.setHorizontalAlignment( javax.swing.JLabel.CENTER );
+        lame.setModel(historyTableModel);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( javax.swing.JLabel.CENTER );
 
-// Apply to all columns
+
 for (int i = 0; i < lame.getColumnCount(); i++) {
     lame.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
 }
