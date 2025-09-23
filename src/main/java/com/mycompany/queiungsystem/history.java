@@ -1,6 +1,8 @@
 package com.mycompany.queiungsystem;
     
     import javax.swing.table.DefaultTableModel;
+    import javax.swing.table.DefaultTableCellRenderer;
+    import javax.swing.plaf.basic.BasicScrollBarUI;
 
 public class history extends javax.swing.JFrame {
     
@@ -15,7 +17,49 @@ public class history extends javax.swing.JFrame {
         setSize(720,390);
         setTitle("Order History");
         
+        lame.setFont(new java.awt.Font("Aracde Gamer", java.awt.Font.PLAIN, 14));
+           
+
+        
          lame.setModel(historyTableModel);
+            DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+centerRenderer.setHorizontalAlignment( javax.swing.JLabel.CENTER );
+
+// Apply to all columns
+for (int i = 0; i < lame.getColumnCount(); i++) {
+    lame.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+}
+         
+         jScrollPane1.setOpaque(false);
+jScrollPane1.getViewport().setOpaque(false);
+jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+jScrollPane1.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+    @Override
+    protected void configureScrollBarColors() {
+        this.thumbColor = new java.awt.Color(255, 215, 0);   // gold handle
+        this.trackColor = new java.awt.Color(128, 0, 0);     // dark red track
+    }
+});
+
+
+
+
+
+
+// Make the table transparent
+lame.setOpaque(false);
+lame.setShowGrid(false); 
+
+jScrollPane1.setBorder(null);
+jScrollPane1.setOpaque(false);
+jScrollPane1.getViewport().setOpaque(false);
+
+// Remove table borders + transparency
+lame.setBorder(null);
+lame.setShowGrid(false);
+lame.setOpaque(false);
          
     }
 
@@ -30,6 +74,7 @@ public class history extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lame = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
@@ -49,7 +94,13 @@ public class history extends javax.swing.JFrame {
         jPanel1.add(jButton1);
         jButton1.setBounds(0, 0, 220, 50);
 
-        lame.setBackground(new java.awt.Color(204, 0, 0));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/orderhisto.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(20, 120, 500, 23);
+
+        lame.setBackground(new java.awt.Color(199, 5, 57));
+        lame.setForeground(new java.awt.Color(255, 255, 255));
         lame.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -58,19 +109,22 @@ public class history extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3"
             }
         ));
+        lame.setEnabled(false);
+        lame.setRowHeight(25);
+        lame.setRowSelectionAllowed(false);
         lame.getTableHeader().setResizingAllowed(false);
         lame.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(lame);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 110, 510, 240);
+        jScrollPane1.setBounds(20, 120, 500, 200);
 
         jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
         jPanel1.add(jButton2);
         jButton2.setBounds(580, 180, 120, 40);
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/orderhisto.png"))); // NOI18N
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/orderhis2.png"))); // NOI18N
         jPanel1.add(background);
         background.setBounds(0, 0, 710, 360);
 
@@ -133,6 +187,7 @@ public class history extends javax.swing.JFrame {
     private javax.swing.JLabel background;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable lame;

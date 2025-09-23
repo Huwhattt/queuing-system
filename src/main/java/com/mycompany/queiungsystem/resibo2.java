@@ -30,8 +30,25 @@ public class resibo2 extends javax.swing.JFrame {
         jButton1.setOpaque(false);
         
         resiboTable.getColumnModel().getColumn(0).setPreferredWidth(20);
-        resiboTable.getColumnModel().getColumn(1).setPreferredWidth(100);
+        resiboTable.getColumnModel().getColumn(1).setPreferredWidth(800);
         resiboTable.getColumnModel().getColumn(2).setPreferredWidth(30);
+        
+        
+        jScrollPane1.setOpaque(false);
+        jScrollPane1.getViewport().setOpaque(false);
+
+// Make the table transparent
+        resiboTable.setOpaque(false);
+        resiboTable.setShowGrid(false); 
+
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setOpaque(false);
+        jScrollPane1.getViewport().setOpaque(false);
+
+// Remove table borders + transparency
+        resiboTable.setBorder(null);
+        resiboTable.setShowGrid(false);
+        resiboTable.setOpaque(false);
         
 
         
@@ -115,24 +132,30 @@ public class resibo2 extends javax.swing.JFrame {
 
         resiboTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3"
             }
         ));
+        resiboTable.setEnabled(false);
+        resiboTable.setRowSelectionAllowed(false);
+        resiboTable.getTableHeader().setResizingAllowed(false);
+        resiboTable.getTableHeader().setReorderingAllowed(false);
+        resiboTable.setUpdateSelectionOnSort(false);
+        resiboTable.setVerifyInputWhenFocusTarget(false);
         jScrollPane1.setViewportView(resiboTable);
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(250, 170, 210, 110);
 
-        serv.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        serv.setFont(new java.awt.Font("Segoe UI Black", 0, 9)); // NOI18N
         serv.setText("jLabel2");
         jPanel1.add(serv);
-        serv.setBounds(330, 153, 60, 14);
+        serv.setBounds(330, 153, 60, 13);
 
         ref.setText("jLabel3");
         jPanel1.add(ref);
