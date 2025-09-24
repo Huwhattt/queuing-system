@@ -319,7 +319,7 @@ public class testing extends javax.swing.JFrame {
     receipt.loadReceiptData(model, total, payment, change, orderType);
 
     receipt.setVisible(true);
-    
+    this.dispose();
     clearTable();
     }//GEN-LAST:event_printActionPerformed
 

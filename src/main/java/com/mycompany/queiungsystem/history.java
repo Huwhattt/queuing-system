@@ -19,29 +19,25 @@ public class history extends javax.swing.JFrame {
         
         lame.setFont(new java.awt.Font("Aracde Gamer", java.awt.Font.PLAIN, 14));
            
-
-        
         lame.setModel(historyTableModel);
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment( javax.swing.JLabel.CENTER );
-
-
-for (int i = 0; i < lame.getColumnCount(); i++) {
-    lame.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-}
+        for (int i = 0; i < lame.getColumnCount(); i++) {
+            lame.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
          
-         jScrollPane1.setOpaque(false);
-jScrollPane1.getViewport().setOpaque(false);
-jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setOpaque(false);
+        jScrollPane1.getViewport().setOpaque(false);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-jScrollPane1.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
-    @Override
-    protected void configureScrollBarColors() {
-        this.thumbColor = new java.awt.Color(255, 215, 0);   // gold handle
-        this.trackColor = new java.awt.Color(128, 0, 0);     // dark red track
-    }
-});
+    jScrollPane1.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+        @Override
+        protected void configureScrollBarColors() {
+            this.thumbColor = new java.awt.Color(255, 215, 0);   // gold handle
+            this.trackColor = new java.awt.Color(128, 0, 0);     // dark red track
+        }
+    });
 
 
 

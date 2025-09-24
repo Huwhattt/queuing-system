@@ -13,7 +13,7 @@ public class OrderData {
     
     private static Map<Integer, List<String>> orderHistory = new HashMap<>();
     private static Map<Integer, Double> orderTotals = new HashMap<>();
-     private static Map<Integer, String> orderTypes = new HashMap<>(); 
+    private static Map<Integer, String> orderTypes = new HashMap<>(); 
 
 
     static int currentOrderNumber = 0;
