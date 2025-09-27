@@ -41,7 +41,7 @@ public class choice extends javax.swing.JFrame {
         });
         getContentPane().add(dineout, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 420, 230, 70));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/qms kiosk and status.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Darex\\Downloads\\POS DESIGN\\choice.png")); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 760));
 
         pack();

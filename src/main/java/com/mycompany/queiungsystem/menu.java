@@ -240,15 +240,24 @@ int[] prices = {120, 100, 150, 200, 130, 180};
     }//GEN-LAST:event_mealtotalActionPerformed
 
     private void addorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addorderActionPerformed
-    if (selectedMealIndex != -1) {
+if (selectedMealIndex != -1) {
+        String meal = meals[selectedMealIndex];
         int qty = Integer.parseInt(quantity.getText());
-        OrderData.addOrder(meals[selectedMealIndex], prices[selectedMealIndex], qty);
 
-        JOptionPane.showMessageDialog(this, 
-            meals[selectedMealIndex] + " added!\nCurrent Total: " + OrderData.getFormattedTotal());
+        // Check stock first
+        if (InventoryData.reduceStock(meal, qty)) {
+            OrderData.addOrder(meal, prices[selectedMealIndex], qty);
+            JOptionPane.showMessageDialog(this, 
+                meal + " added!\nCurrent Total: " + OrderData.getFormattedTotal());
+        } else {
+            JOptionPane.showMessageDialog(this, 
+                meal + " is unavailable or insufficient stock!");
+        }
     } else {
         JOptionPane.showMessageDialog(this, "Please select a meal first!");
     }
+    quantity.setText("1");
+    mealtotal.setText("");
     }//GEN-LAST:event_addorderActionPerformed
 
     private void b1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b1ActionPerformed

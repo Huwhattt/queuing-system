@@ -60,7 +60,7 @@ public class CustomersOrder extends javax.swing.JFrame {
         });
         getContentPane().add(number, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 170, 40));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/your order.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/number.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 760));
 
         pack();

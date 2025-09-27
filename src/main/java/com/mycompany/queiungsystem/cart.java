@@ -32,7 +32,7 @@ public class cart extends javax.swing.JFrame {
         proceed = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         totalmenu = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -73,8 +73,8 @@ public class cart extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 330, 410));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cart.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 760));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cart.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 770));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -143,7 +143,7 @@ public class cart extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton proceed;
     private javax.swing.JTextArea totalmenu;

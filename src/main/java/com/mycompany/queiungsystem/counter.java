@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
 /**
  *
@@ -98,14 +99,6 @@ public class counter extends javax.swing.JFrame {
         time6.setBorder(null);
         time6.setBackground(new Color(0, 0, 0, 0));
         
-        completed.setContentAreaFilled(false);
-        completed.setBorderPainted(false);
-        completed.setOpaque(false);
-        
-        refresh.setContentAreaFilled(false);
-        refresh.setBorderPainted(false);
-        refresh.setOpaque(false);
-        
         qnoFields = new JTextField[]{qno1, qno2, qno3, qno4, qno5, qno6};
         statFields = new JTextField[]{stat1, stat2, stat3, stat4, stat5, stat6};
         timeFields = new JTextField[]{time1, time2, time3, time4, time5, time6};
@@ -123,6 +116,8 @@ public class counter extends javax.swing.JFrame {
         stat4.setEditable(false);
         stat5.setEditable(false);
         stat6.setEditable(false);
+        
+        refresh();
                 
     }
     
@@ -130,12 +125,12 @@ public class counter extends javax.swing.JFrame {
         for (int i = 0; i < qnoFields.length; i++) {
             if (qnoFields[i].getText().isEmpty()) {
                 qnoFields[i].setText(orderNumber);
-                return i; 
+                return i;
             }
         }
         return -1;
     }
-    
+
     public void setOrderStatus(int index, String status) {
         if (index >= 0 && index < statFields.length) {
             statFields[index].setText(status);
@@ -149,74 +144,74 @@ public class counter extends javax.swing.JFrame {
             timeFields[index].setText(currentTime);
         }
     }
-    
-    public void refreshOrders() {
+
+    private void refresh() {
+        Timer timer = new Timer(1000, e -> refreshOrders());
+        timer.start();
+    }
+
+    private void refreshOrders() {
         for (int i = 0; i < qnoFields.length - 1; i++) {
 
-            if (qnoFields[i].getText().isEmpty()) {
-                for (int j = i + 1; j < qnoFields.length; j++) {
-                    if (!qnoFields[j].getText().isEmpty()) {
+            if (qnoFields[i].getText().trim().isEmpty()) {
+                qnoFields[i].setText(qnoFields[i + 1].getText());
+                statFields[i].setText(statFields[i + 1].getText());
+                timeFields[i].setText(timeFields[i + 1].getText());
 
-                        qnoFields[i].setText(qnoFields[j].getText());
-                        statFields[i].setText(statFields[j].getText());
-                        timeFields[i].setText(timeFields[j].getText());
-
-                        qnoFields[j].setText("");
-                        statFields[j].setText("");
-                        timeFields[j].setText("");
-
-                        break; 
-                    }
-                }
+                qnoFields[i + 1].setText("");
+                statFields[i + 1].setText("");
+                timeFields[i + 1].setText("");
             }
         }
     }
-    
-    public void FIFO() {
-        for (int i = 0; i < qnoFields.length; i++) {
-            String orderNum = qnoFields[i].getText().trim();
-            String status = statFields[i].getText().trim();
 
-            if (!orderNum.isEmpty()) {
-                if (!status.equalsIgnoreCase("Ready")) {
-                    JOptionPane.showMessageDialog(this,
-                            "Order " + orderNum + " is still " + status + ". Cannot complete until it is Ready.",
-                            "Order Not Ready",
-                            JOptionPane.WARNING_MESSAGE);
-                    return;  // stop here, no completion
-                }
+    private void done(JTextField qno, JTextField stat, JTextField time) {
+        String orderNum = qno.getText().trim();
+        String status = stat.getText().trim();
 
-                // Status is Ready, proceed
-                int response = JOptionPane.showConfirmDialog(this,
-                        "Mark order " + orderNum + " as completed?",
-                        "Confirm Completion",
-                        JOptionPane.YES_NO_OPTION);
+        if (!orderNum.isEmpty()) {
 
-                if (response == JOptionPane.YES_OPTION) {
-                    JOptionPane.showMessageDialog(this,
-                            "Order " + orderNum + " completed.",
-                            "Success",
-                            JOptionPane.INFORMATION_MESSAGE);
+            if (!status.equalsIgnoreCase("Ready")) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Order " + orderNum + " is still " + status + ". Cannot complete until it is Ready.",
+                        "Order Not Ready",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
 
-                    if (KFrame.woah != null) {
-                        KFrame.woah.doneOrder(orderNum);
-                    }
+            int choice = JOptionPane.showConfirmDialog(
+                    null,
+                    "Mark order " + orderNum + " as completed?",
+                    "Confirm Completion",
+                    JOptionPane.YES_NO_OPTION
+            );
 
-                    qnoFields[i].setText("");
-                    statFields[i].setText("");
-                    timeFields[i].setText("");
+            if (choice == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Order " + orderNum + " completed.",
+                        "Success",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
 
-                    return;
-                } else {
-                    return;
+                qno.setText("");
+                stat.setText("");
+                time.setText("");
+
+                if (KFrame.woah != null) {
+                    KFrame.woah.doneOrder(orderNum);
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "No order found in this slot.",
+                    "Empty Order",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
         }
-
-        JOptionPane.showMessageDialog(this,
-                "No orders to complete.",
-                "Empty Queue",
-                JOptionPane.INFORMATION_MESSAGE);
     }
     
     public JTextField[] getQnoFields() {
@@ -258,206 +253,101 @@ public class counter extends javax.swing.JFrame {
         time4 = new javax.swing.JTextField();
         time5 = new javax.swing.JTextField();
         time6 = new javax.swing.JTextField();
-        completed = new javax.swing.JButton();
-        refresh = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         qno1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 qno1MouseClicked(evt);
             }
         });
+        getContentPane().add(qno1);
+        qno1.setBounds(30, 120, 40, 30);
 
         qno2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 qno2MouseClicked(evt);
             }
         });
+        getContentPane().add(qno2);
+        qno2.setBounds(30, 160, 40, 30);
 
+        qno3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                qno3MouseClicked(evt);
+            }
+        });
         qno3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 qno3ActionPerformed(evt);
             }
         });
+        getContentPane().add(qno3);
+        qno3.setBounds(30, 200, 40, 30);
 
         qno4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 qno4MouseClicked(evt);
             }
         });
+        getContentPane().add(qno4);
+        qno4.setBounds(30, 235, 40, 32);
 
         qno5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 qno5MouseClicked(evt);
             }
         });
+        getContentPane().add(qno5);
+        qno5.setBounds(30, 270, 40, 30);
 
         qno6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 qno6MouseClicked(evt);
             }
         });
+        getContentPane().add(qno6);
+        qno6.setBounds(30, 310, 40, 32);
+        getContentPane().add(stat1);
+        stat1.setBounds(160, 120, 80, 30);
+        getContentPane().add(stat2);
+        stat2.setBounds(160, 160, 80, 30);
+        getContentPane().add(stat3);
+        stat3.setBounds(160, 200, 80, 30);
+        getContentPane().add(stat4);
+        stat4.setBounds(160, 240, 80, 30);
+        getContentPane().add(stat5);
+        stat5.setBounds(160, 270, 80, 32);
+        getContentPane().add(stat6);
+        stat6.setBounds(160, 310, 80, 30);
+        getContentPane().add(time1);
+        time1.setBounds(290, 120, 90, 30);
+        getContentPane().add(time2);
+        time2.setBounds(290, 160, 90, 30);
+        getContentPane().add(time3);
+        time3.setBounds(290, 200, 90, 30);
+        getContentPane().add(time4);
+        time4.setBounds(290, 240, 90, 30);
+        getContentPane().add(time5);
+        time5.setBounds(290, 280, 90, 30);
+        getContentPane().add(time6);
+        time6.setBounds(290, 320, 90, 30);
 
-        completed.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                completedActionPerformed(evt);
-            }
-        });
-
-        refresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/counter.png"))); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(qno2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(stat4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(qno1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(240, 240, 240)
-                .addComponent(time2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(240, 240, 240)
-                .addComponent(time4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(240, 240, 240)
-                .addComponent(time3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(qno4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(stat3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(240, 240, 240)
-                .addComponent(time1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(qno6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(320, 320, 320)
-                .addComponent(completed, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(stat6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(stat5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(240, 240, 240)
-                .addComponent(time6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(stat2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(240, 240, 240)
-                .addComponent(time5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(qno5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(qno3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(320, 320, 320)
-                .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(stat1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jLabel1)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(completed, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(235, 235, 235)
-                .addComponent(qno4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(qno6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jLabel1)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(qno2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(qno1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addComponent(qno3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(46, 46, 46)
-                .addComponent(qno5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(240, 240, 240)
-                        .addComponent(stat4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addComponent(stat3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(stat2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(stat1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(4, 4, 4)
-                .addComponent(stat5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(stat6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(time2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(time3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(time1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(240, 240, 240)
-                .addComponent(time4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(time6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(time5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/counter.png"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 390, 400);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void completedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completedActionPerformed
-        FIFO();
-    }//GEN-LAST:event_completedActionPerformed
-
     private void qno1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qno1MouseClicked
-
+        done(qno1, stat1, time1);
     }//GEN-LAST:event_qno1MouseClicked
 
     private void qno2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qno2MouseClicked
-
+        done(qno2, stat2, time2);
     }//GEN-LAST:event_qno2MouseClicked
 
     private void qno3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qno3ActionPerformed
@@ -465,22 +355,20 @@ public class counter extends javax.swing.JFrame {
     }//GEN-LAST:event_qno3ActionPerformed
 
     private void qno4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qno4MouseClicked
-
+        done(qno4, stat4, time4);
     }//GEN-LAST:event_qno4MouseClicked
 
     private void qno5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qno5MouseClicked
-
+        done(qno5, stat5, time5);
     }//GEN-LAST:event_qno5MouseClicked
 
     private void qno6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qno6MouseClicked
- 
+        done(qno6, stat6, time6);
     }//GEN-LAST:event_qno6MouseClicked
 
-    private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
-
-        refreshOrders();
-        
-    }//GEN-LAST:event_refreshActionPerformed
+    private void qno3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qno3MouseClicked
+        done(qno3, stat3, time3);
+    }//GEN-LAST:event_qno3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -508,15 +396,13 @@ public class counter extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton completed;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField qno1;
     private javax.swing.JTextField qno2;
     private javax.swing.JTextField qno3;
     private javax.swing.JTextField qno4;
     private javax.swing.JTextField qno5;
     private javax.swing.JTextField qno6;
-    private javax.swing.JButton refresh;
     private javax.swing.JTextField stat1;
     private javax.swing.JTextField stat2;
     private javax.swing.JTextField stat3;

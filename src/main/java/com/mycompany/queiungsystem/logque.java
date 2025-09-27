@@ -1,53 +1,33 @@
 
 package com.mycompany.queiungsystem;
 
-import java.io.*;
-import java.util.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.*;
+
+
+
 
 public class logque extends javax.swing.JFrame {
-    private List<String> usernames = new ArrayList<>();
-    private List<String> passwords = new ArrayList<>();
-    
+  
     public logque() {
         initComponents();
         
         setTitle("Employee Login");
         setSize(1112,797);
         setResizable(false);
-        loadAccountsFromFile();
     }
+    
+    public static class Accounts {
+        private static final String URL = "jdbc:mysql://localhost:3306/queuingdb";
+        private static final String USER = "root";
+        private static final String PASS = "12341";     
 
-   private void loadAccountsFromFile() {
-        File file = new File("accounts.txt");
-
-       
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "Failed to create accounts.txt");
-                return;
-            }
-        }
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 3) {
-                    String user = parts[1].trim();  
-                    String pass = parts[2].trim();  
-                    usernames.add(user);
-                    passwords.add(pass);
-                }
-            }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error reading accounts.txt");
-            e.printStackTrace();
+        public static Connection getConnection() throws SQLException {
+            return DriverManager.getConnection(URL, USER, PASS);
         }
     }
+
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -150,28 +130,36 @@ public class logque extends javax.swing.JFrame {
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
 
-        String enteredUser = inuser.getText().trim();
+          String enteredUser = inuser.getText().trim();
         String enteredPass = new String(pfield.getPassword()).trim();
 
-        for (int i = 0; i < usernames.size(); i++) {
-            if (enteredUser.equals(usernames.get(i)) && enteredPass.equals(passwords.get(i))) {
-                JOptionPane.showMessageDialog(this, "Access Granted!");
+        String sql = "SELECT * FROM accounts WHERE username = ? AND password = ?";
 
-                KFrame.callscreens();
-                
-                testing t = new testing();
-                t.setVisible(true);
-                
-                dispose();
-                return;
+        try (Connection conn = Accounts.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setString(1, enteredUser);
+            pst.setString(2, enteredPass);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(this, "Access Granted!");
+                    KFrame.callscreens();
+
+                    testing t = new testing();
+                    t.setVisible(true);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Access Denied\nInvalid Username or Password");
+                    inuser.setText("");
+                    pfield.setText("");
+                }
             }
-        }
 
-      
-        JOptionPane.showMessageDialog(this, "Access Denied\nInvalid Username or Password");
-        inuser.setText("");
-        pfield.setText("");
-    
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Database error occurred");
+        }
     }//GEN-LAST:event_loginActionPerformed
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed

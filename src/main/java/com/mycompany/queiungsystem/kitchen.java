@@ -82,7 +82,7 @@ public class kitchen extends javax.swing.JFrame {
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%03d", orderNumber)).append("\n"); 
+        sb.append(String.format("%03d", orderNumber)).append("\n");
 
         for (String item : orderItems) {
             try {
@@ -100,14 +100,12 @@ public class kitchen extends javax.swing.JFrame {
 
         for (JTextArea orderField : kitchenOrders) {
             if (orderField.getText().isEmpty()) {
-                orderField.setText(sb.toString().trim()); 
+                orderField.setText(sb.toString().trim());
                 break;
             }
         }
     }
 
-
-    
     public void markOrderAsReady(String orderNum) {
         if (orderNum == null || orderNum.trim().isEmpty()) {
             return;
@@ -161,8 +159,8 @@ public class kitchen extends javax.swing.JFrame {
                     "Order Missing",
                     JOptionPane.WARNING_MESSAGE);
         }
-    } 
-    
+    }
+
     public void markOrderReady(int index, JTextArea orderArea) {
         String orderText = kitchenOrders[index].getText();
 
@@ -171,6 +169,7 @@ public class kitchen extends javax.swing.JFrame {
             if (lines.length > 0) {
                 String orderNum = lines[0].trim();
                 System.out.println("Looking for orderNum: '" + orderNum + "'");
+
                 markOrderAsReady(orderNum);
                 orderArea.setText("");
             } else {
@@ -178,15 +177,6 @@ public class kitchen extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "No order found to mark ready.");
-        }
-    }
-    
-    public void readyFirst() {
-        for (int i = 0; i < kitchenOrders.length; i++) {
-            if (kitchenOrders[i].getText() != null && !kitchenOrders[i].getText().trim().isEmpty()) {
-                markOrderReady(i, kitchenOrders[i]);
-                break;
-            }
         }
     }
     
@@ -217,7 +207,8 @@ public class kitchen extends javax.swing.JFrame {
         order5 = new javax.swing.JTextArea();
         jScrollPane6 = new javax.swing.JScrollPane();
         order6 = new javax.swing.JTextArea();
-        jLabel3 = new javax.swing.JLabel();
+        inventory = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(710, 363));
@@ -333,40 +324,53 @@ public class kitchen extends javax.swing.JFrame {
         getContentPane().add(jScrollPane6);
         jScrollPane6.setBounds(490, 220, 180, 86);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/kitchen.png"))); // NOI18N
-        jLabel3.setText("jLabel3");
-        jLabel3.setMaximumSize(new java.awt.Dimension(710, 363));
-        jLabel3.setMinimumSize(new java.awt.Dimension(710, 363));
-        jLabel3.setPreferredSize(new java.awt.Dimension(710, 363));
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 710, 363);
+        inventory.setBorder(null);
+        inventory.setBorderPainted(false);
+        inventory.setContentAreaFilled(false);
+        inventory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inventoryActionPerformed(evt);
+            }
+        });
+        getContentPane().add(inventory);
+        inventory.setBounds(230, 0, 190, 50);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Darex\\Downloads\\kitchen.png")); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 710, 363);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void ready1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ready1ActionPerformed
-        readyFirst();  
+        markOrderReady(0, kitchenOrders[0]); 
     }//GEN-LAST:event_ready1ActionPerformed
 
     private void ready2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ready2ActionPerformed
-        readyFirst();
+        markOrderReady(1, kitchenOrders[1]);
     }//GEN-LAST:event_ready2ActionPerformed
 
     private void ready3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ready3ActionPerformed
-        readyFirst();
+        markOrderReady(2, kitchenOrders[2]);
     }//GEN-LAST:event_ready3ActionPerformed
 
     private void ready4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ready4ActionPerformed
-        readyFirst();
+        markOrderReady(3, kitchenOrders[3]);
     }//GEN-LAST:event_ready4ActionPerformed
 
     private void ready5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ready5ActionPerformed
-        readyFirst();
+        markOrderReady(4, kitchenOrders[4]);
     }//GEN-LAST:event_ready5ActionPerformed
 
     private void ready6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ready6ActionPerformed
-        readyFirst();
+        markOrderReady(5, kitchenOrders[5]);
     }//GEN-LAST:event_ready6ActionPerformed
+
+    private void inventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryActionPerformed
+        inventory wah = new inventory();
+        wah.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_inventoryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -395,7 +399,8 @@ public class kitchen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton inventory;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

@@ -112,20 +112,20 @@ public class status2 extends javax.swing.JFrame {
                 readyOrders[i].setText(orderNum);
 
                 prepOrders[i].setText("");
-                break;  
-            }
-        }
-    }
-    
-    public void doneOrder(String orderNumber) {
-        for (JTextField readyField : readyOrders) {
-            if (readyField.getText().equals(orderNumber)) {
-                readyField.setText(""); 
                 break;
             }
         }
     }
-    
+
+    public void doneOrder(String orderNumber) {
+        for (JTextField readyField : readyOrders) {
+            if (readyField.getText().equals(orderNumber)) {
+                readyField.setText("");
+                break;
+            }
+        }
+    }
+
     public JTextField[] getPrepOrders() {
         return prepOrders;
     }
@@ -151,7 +151,7 @@ public class status2 extends javax.swing.JFrame {
         ready4 = new javax.swing.JTextField();
         ready5 = new javax.swing.JTextField();
         ready6 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(404, 400));
@@ -183,9 +183,9 @@ public class status2 extends javax.swing.JFrame {
         getContentPane().add(ready6);
         ready6.setBounds(310, 300, 60, 40);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/stats.png"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 390, 400);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/preparing1.png"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 390, 400);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -216,7 +216,7 @@ public class status2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField prep1;
     private javax.swing.JTextField prep2;
     private javax.swing.JTextField prep3;
