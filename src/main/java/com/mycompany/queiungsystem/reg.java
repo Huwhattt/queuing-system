@@ -1,4 +1,3 @@
-
 package com.mycompany.queiungsystem;
 
 import java.sql.*;
@@ -28,6 +27,8 @@ public class reg extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
   
     private Connection getConnection() throws SQLException {
