@@ -60,7 +60,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Darex\Downloads\POS DESIGN\choice.png"/>
+          <Image iconType="3" name="/images/choice.png"/>
         </Property>
       </Properties>
       <Constraints>
