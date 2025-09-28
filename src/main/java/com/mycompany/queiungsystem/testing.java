@@ -293,7 +293,11 @@ public class testing extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-     searchForOrder();
+    if (hasPaid) {
+        JOptionPane.showMessageDialog(this, "You need to Finish a Transaction");
+        return;
+    } 
+        searchForOrder();
     }//GEN-LAST:event_searchActionPerformed
 
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
@@ -321,6 +325,7 @@ public class testing extends javax.swing.JFrame {
     receipt.setVisible(true);
     this.dispose();
     clearTable();
+    hasPaid = false;
     }//GEN-LAST:event_printActionPerformed
 
     private void payment2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payment2ActionPerformed

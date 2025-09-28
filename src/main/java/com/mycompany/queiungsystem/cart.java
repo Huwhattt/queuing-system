@@ -1,4 +1,3 @@
-
 package com.mycompany.queiungsystem;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +72,7 @@ public class cart extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 330, 410));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cart.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cart.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 770));
 
         pack();

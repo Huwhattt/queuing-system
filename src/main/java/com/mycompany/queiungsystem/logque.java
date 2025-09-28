@@ -130,7 +130,7 @@ public class logque extends javax.swing.JFrame {
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
 
-          String enteredUser = inuser.getText().trim();
+        String enteredUser = inuser.getText().trim();
         String enteredPass = new String(pfield.getPassword()).trim();
 
         String sql = "SELECT * FROM accounts WHERE username = ? AND password = ?";
@@ -160,6 +160,7 @@ public class logque extends javax.swing.JFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Database error occurred");
         }
+
     }//GEN-LAST:event_loginActionPerformed
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed

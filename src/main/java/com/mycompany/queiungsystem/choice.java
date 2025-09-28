@@ -1,4 +1,3 @@
-
 package com.mycompany.queiungsystem;
 
 
@@ -55,7 +54,7 @@ public class choice extends javax.swing.JFrame {
     }//GEN-LAST:event_dineoutActionPerformed
 
     private void dineinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dineinActionPerformed
-         OrderData.orderType = "Dine-In";
+        OrderData.orderType = "Dine-In";
         menu hey = new menu ();
         hey.setVisible(true);
         this.dispose();

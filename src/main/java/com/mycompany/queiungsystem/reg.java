@@ -1,44 +1,40 @@
 
 package com.mycompany.queiungsystem;
 
-import java.util.*;
-import javax.swing.*;
+import java.sql.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class reg extends javax.swing.JFrame {
     
     public reg() {
         initComponents();
         setResizable(false);
-
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
-addWindowListener(new java.awt.event.WindowAdapter() {
-    public void windowClosing(java.awt.event.WindowEvent e) {
-        int confirmed = JOptionPane.showConfirmDialog(
-            null,
-            "Are you sure you want to exit?",
-            "Logout Confirmation",
-            JOptionPane.YES_NO_OPTION
-        );
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                int confirmed = JOptionPane.showConfirmDialog(
+                    null,
+                    "Are you sure you want to exit?",
+                    "Logout Confirmation",
+                    JOptionPane.YES_NO_OPTION
+                );
 
-        if (confirmed == JOptionPane.YES_OPTION) {
-            new logque().setVisible(true);
-            dispose();
-        }
+                if (confirmed == JOptionPane.YES_OPTION) {
+                    new logque().setVisible(true);
+                    dispose();
+                }
+            }
+        });
     }
-});
 
+  
+    private Connection getConnection() throws SQLException {
+        String url = "jdbc:mysql://localhost:3306/queuingdb"; 
+        String user = "root"; 
+        String pass = "12341"; 
+        return DriverManager.getConnection(url, user, pass);
     }
 
     
@@ -131,9 +127,6 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         jButton1.setBounds(520, 560, 130, 40);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/tempreg.png"))); // NOI18N
-        jLabel5.setMaximumSize(new java.awt.Dimension(1119, 799));
-        jLabel5.setMinimumSize(new java.awt.Dimension(1119, 799));
-        jLabel5.setPreferredSize(new java.awt.Dimension(1119, 799));
         getContentPane().add(jLabel5);
         jLabel5.setBounds(0, 0, 1119, 799);
 
@@ -150,6 +143,14 @@ addWindowListener(new java.awt.event.WindowAdapter() {
             return;
         }
 
+        // Check password 6 digits
+        if (strpass.length() != 6) {
+            JOptionPane.showMessageDialog(null, "Password must be 6 digits");
+            regpass.setText("");
+            regcon.setText("");
+            return;
+        }
+
         if (!strpass.equals(strconfirm)) {
             JOptionPane.showMessageDialog(null, "Passwords do not match");
             regpass.setText("");
@@ -157,32 +158,61 @@ addWindowListener(new java.awt.event.WindowAdapter() {
             return;
         }
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("accounts.txt"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length >= 2 && parts[1].trim().equals(username)) {
-                    JOptionPane.showMessageDialog(null, "Username already exists. Choose another one.");
-                    return;
-                }
+        Connection conn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection();
+
+            // Check username 
+            String checkQuery = "SELECT * FROM accounts WHERE username = ?";
+            pst = conn.prepareStatement(checkQuery);
+            pst.setString(1, username);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Username already exists. Choose another one.");
+                return;
             }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error reading accounts.txt");
-        }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("accounts.txt", true))) {
-            writer.write(username + "," + username + "," + strpass);
-            writer.newLine();
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error writing to accounts.txt");
+            // Insert new 
+            String insertQuery = "INSERT INTO accounts (name, username, password) VALUES (?, ?, ?)";
+            pst = conn.prepareStatement(insertQuery);
+            pst.setString(1, username);
+            pst.setString(2, username);
+            pst.setString(3, strpass);
+            pst.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Registration Successful");
+
+            new logque().setVisible(true);
+            dispose();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Database Error: " + e.getMessage());
             e.printStackTrace();
-            return;
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+            }
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+            }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+            }
         }
 
-        JOptionPane.showMessageDialog(null, "Registration Successful");
-
-        new logque().setVisible(true);
-        dispose();
     }//GEN-LAST:event_regissaveActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed

@@ -1,4 +1,3 @@
-
 package com.mycompany.queiungsystem;
 
 import java.util.List;
